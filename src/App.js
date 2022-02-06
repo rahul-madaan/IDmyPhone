@@ -1,10 +1,12 @@
 import './App.css';
 import {LoginPage} from "./MyComponents/LoginPage";
+import {Navbar} from "./MyComponents/Navbar";
 
 function App() {
   return (
     <>
-    <LoginPage/>
+      <Navbar/>
+      <LoginPage/>
     </>
   );
 }
