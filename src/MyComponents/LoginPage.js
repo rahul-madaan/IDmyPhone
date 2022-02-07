@@ -1,10 +1,14 @@
 import React from 'react'
+import axios from "axios";
 
 export const LoginPage = (props) => {
 
 
     const loginSubmit = (e)=> {
         e.preventDefault()
+        axios.get("http://localhost:3001/retrieve", {}).then((result)=>{
+            console.log(result)
+        })
 }
 
 
