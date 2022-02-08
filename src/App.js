@@ -4,6 +4,7 @@ import {Navbar} from "./MyComponents/Navbar";
 import {useState} from "react";
 import {BrowserRouter as Router, Routes, Route} from "react-router-dom";
 import {LoginRegisterNavbar} from "./MyComponents/LoginRegisterNavbar";
+import {RegisterPage} from "./MyComponents/RegisterPage";
 
 function App() {
     const [aadhaarNumber, setAadhaarNumber] = useState("")
@@ -24,10 +25,7 @@ function App() {
                     <Route exact path="/register"
                            element={<>
                                <LoginRegisterNavbar/>
-                               <LoginPage aadhaarNumber={aadhaarNumber}
-                                               setAadhaarNumber={setAadhaarNumber}
-                                               password={password}
-                                               setPassword={setPassword}/></>}/>
+                               <RegisterPage/></>}/>
                     <Route exact path="/home" element={<Navbar/>}/>
                 </Routes>
             </Router>
