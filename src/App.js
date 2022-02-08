@@ -13,13 +13,21 @@ function App() {
     return (
         <>
             <Router>
-                <LoginRegisterNavbar/>
                 <Routes>
                     <Route exact path="/login"
-                           element={<LoginPage aadhaarNumber={aadhaarNumber}
+                           element={<>
+                               <LoginRegisterNavbar/>
+                               <LoginPage aadhaarNumber={aadhaarNumber}
+                                          setAadhaarNumber={setAadhaarNumber}
+                                          password={password}
+                                          setPassword={setPassword}/></>}/>
+                    <Route exact path="/register"
+                           element={<>
+                               <LoginRegisterNavbar/>
+                               <LoginPage aadhaarNumber={aadhaarNumber}
                                                setAadhaarNumber={setAadhaarNumber}
                                                password={password}
-                                               setPassword={setPassword}/>}/>
+                                               setPassword={setPassword}/></>}/>
                     <Route exact path="/home" element={<Navbar/>}/>
                 </Routes>
             </Router>
