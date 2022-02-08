@@ -1,0 +1,3 @@
+1. while entering aadhaar number add dashes
+2. check for 12 digit adhar number
+3. if(localStorage has login data then redirect/return to home)
