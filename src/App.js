@@ -3,6 +3,7 @@ import {LoginPage} from "./MyComponents/LoginPage";
 import {Navbar} from "./MyComponents/Navbar";
 import {useState} from "react";
 import {BrowserRouter as Router, Routes, Route} from "react-router-dom";
+import {LoginRegisterNavbar} from "./MyComponents/LoginRegisterNavbar";
 
 function App() {
     const [aadhaarNumber, setAadhaarNumber] = useState("")
@@ -12,16 +13,14 @@ function App() {
     return (
         <>
             <Router>
-                <Navbar/>
+                <LoginRegisterNavbar/>
                 <Routes>
-                    <Route exact path="/"
+                    <Route exact path="/login"
                            element={<LoginPage aadhaarNumber={aadhaarNumber}
                                                setAadhaarNumber={setAadhaarNumber}
                                                password={password}
-                                               setPassword={setPassword}/>}>
-                    </Route>
-                    <Route exact path="/about" element={<Navbar/>}>
-                    </Route>
+                                               setPassword={setPassword}/>}/>
+                    <Route exact path="/home" element={<Navbar/>}/>
                 </Routes>
             </Router>
         </>
