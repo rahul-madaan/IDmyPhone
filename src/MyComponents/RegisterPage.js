@@ -14,7 +14,7 @@ export const RegisterPage = () => {
 
     const registerSubmit = (e) => {
         e.preventDefault()
-        axios.post("http://localhost:8000/login", {"":""
+        axios.put("http://localhost:8000/register", {"":""
         }).then((result) => {
             console.log(result)
         })
