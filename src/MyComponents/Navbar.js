@@ -18,6 +18,10 @@ export const Navbar = () => {
         e.preventDefault()
         routeChange('/home')
     }
+    const loginSwitch = (e) => {
+        e.preventDefault()
+        routeChange('/login')
+    }
     return (
         <>
             <nav>
@@ -39,7 +43,7 @@ export const Navbar = () => {
                     </li>
                 </ul>
                 <div className="d-grid gap-2 d-md-flex justify-content-md-end">
-                    <button type="button" className="btn btn-outline-danger my-2 mx-3">Log out</button>
+                    <button type="button" className="btn btn-outline-danger my-2 mx-3" onClick={loginSwitch}>Log out</button>
                 </div>
             </nav>
         </>

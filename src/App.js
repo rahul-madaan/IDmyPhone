@@ -13,7 +13,8 @@ function App() {
     const [aadhaarNumber, setAadhaarNumber] = useState("")
     const [password, setPassword] = useState("")
     const [userName, setUserName] = React.useState("Demo") //after login
-    const [userAadhaarNumber, setUserAadhaarNumber] = React.useState("Demo") //after login
+    const [userAadhaarNumber, setUserAadhaarNumber] = React.useState("111111111111") //after login
+    const [numberOfDevices, setNumberOfDevices] = React.useState(0)
 
 
     return (
@@ -26,7 +27,7 @@ function App() {
                                                setAadhaarNumber={setAadhaarNumber}
                                                password={password}
                                                setPassword={setPassword}/></>}/>
-                    <Route exact path="/home" element={<><Navbar/><HomePage userName={userName}/></>}/>
+                    <Route exact path="/home" element={<><Navbar/><HomePage userName={userName} userAadhaarNumber={userAadhaarNumber} numberOfDevices={numberOfDevices}/></>}/>
                     <Route exact path="/register"
                            element={<>
                                <LoginRegisterNavbar/>
@@ -34,11 +35,11 @@ function App() {
                     <Route exact path="/transfer-requests"
                            element={<>
                                <Navbar/>
-                               <TransferRequestsPage/></>}/>
+                               <TransferRequestsPage userName={userName} userAadhaarNumber={userAadhaarNumber} numberOfDevices={numberOfDevices}/></>}/>
                     <Route exact path="/add-new-device"
                            element={<>
                                <Navbar/>
-                               <AddNewDevicePage/></>}/>
+                               <AddNewDevicePage userName={userName} userAadhaarNumber={userAadhaarNumber} numberOfDevices={numberOfDevices}/></>}/>
                 </Routes>
             </Router>
         </>
