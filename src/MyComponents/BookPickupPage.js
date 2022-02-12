@@ -3,26 +3,7 @@ import {useNavigate} from "react-router-dom";
 import React from "react";
 import {MainTableContent} from "./MainTableContent";
 
-export const HomePage = (props) => {
-
-    const array=[{
-        sno:1,
-        deviceIMEI:"1234567890",
-        deviceManufacturer:"OnePlus",
-        deviceName:"9R"
-        },
-        {
-            sno:2,
-            deviceIMEI:"345634563456",
-            deviceManufacturer:"Samsung",
-            deviceName:"Galaxy S21"
-        },
-        {
-            sno:3,
-            deviceIMEI:"123412341234",
-            deviceManufacturer:"Motorola",
-            deviceName:"G3"
-        }]
+export const BookPickupPage = (props) => {
 
     return (
         <>
@@ -31,11 +12,12 @@ export const HomePage = (props) => {
                     <div className="col-md-3">
                         <p>container 1 start</p>
                         <div className="d-flex flex-column  "><img
-                            className="rounded-circle mt-5" width="250px"
-                            src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg"/>
-                            <p className="font-weight-bold">Aadhaar: {props.userAadhaarNumber}</p>
-                            <p className="font-weight-bold">Name: {props.userName}</p>
-                            <p className="font-weight-bold">Number of Devices: {props.numberOfDevices}</p>
+                            className="rounded-circle mt-5 mt-5" width="250px"
+                            src="../MyPhotos/androidPhone.png"/>
+                            <p className="font-weight-bold">Manufacturer: {props.userAadhaarNumber}</p>
+                            <p className="font-weight-bold">Model: {props.userName}</p>
+                            <p className="font-weight-bold">Device IMEI: </p>
+                            <p className="font-weight-bold">Purchase Date: </p>
                         </div>
                     </div>
                     <div className="col align-items-centre">
@@ -52,11 +34,6 @@ export const HomePage = (props) => {
                                 <th scope="col">Report Theft</th>
                             </tr>
                             </thead>
-                            <tbody>
-                            {array.map((array) => {
-                                return <MainTableContent array={array}/>
-                            })}
-                            </tbody>
                         </table>
                     </div>
                 </div>

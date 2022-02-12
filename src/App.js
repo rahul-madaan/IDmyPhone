@@ -8,6 +8,8 @@ import {RegisterPage} from "./MyComponents/RegisterPage";
 import {HomePage} from "./MyComponents/HomePage";
 import {TransferRequestsPage} from "./MyComponents/TransferRequestsPage";
 import {AddNewDevicePage} from "./MyComponents/AddNewDevicePage";
+import {BookPickupPage} from "./MyComponents/BookPickupPage";
+import {ReportTheftPage} from "./MyComponents/ReportTheftPage";
 
 function App() {
     const [aadhaarNumber, setAadhaarNumber] = useState("")
@@ -40,6 +42,14 @@ function App() {
                            element={<>
                                <Navbar/>
                                <AddNewDevicePage userName={userName} userAadhaarNumber={userAadhaarNumber} numberOfDevices={numberOfDevices}/></>}/>
+                    <Route exact path="/book-pickup"
+                           element={<>
+                               <Navbar/>
+                               <BookPickupPage/></>}/>
+                    <Route exact path="/report-theft"
+                           element={<>
+                               <Navbar/>
+                               <ReportTheftPage/></>}/>
                 </Routes>
             </Router>
         </>

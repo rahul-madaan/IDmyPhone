@@ -41,6 +41,11 @@ export const Navbar = () => {
                                 type="button" role="tab" onClick={addNewDeviceSwitch}>Add New Device
                         </button>
                     </li>
+                    <li className="nav-item" role="presentation">
+                        <button className="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact"
+                                type="button" role="tab" >Check Owner
+                        </button>
+                    </li>
                 </ul>
                 <div className="d-grid gap-2 d-md-flex justify-content-md-end">
                     <button type="button" className="btn btn-outline-danger my-2 mx-3" onClick={loginSwitch}>Log out</button>
