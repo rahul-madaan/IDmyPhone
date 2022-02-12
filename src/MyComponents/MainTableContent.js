@@ -9,7 +9,8 @@ export const MainTableContent = (props) => {
                 <td>{props.array.deviceIMEI}</td>
                 <td>{props.array.deviceManufacturer}</td>
                 <td>{props.array.deviceName}</td>
-                <td><button type="button" className="btn btn-outline-danger ">Remove</button></td>
+                <td><button type="button" className="btn btn-outline-success ">Book Pickup</button></td>
+                <td><button type="button" className="btn btn-outline-danger ">Report Theft</button></td>
             </tr>
         </>
     )

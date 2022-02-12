@@ -49,7 +49,8 @@ export const HomePage = (props) => {
                                 <th scope="col">Device IMEI</th>
                                 <th scope="col">Manufacturer</th>
                                 <th scope="col">Model Name</th>
-                                <th scope="col">Remove Device</th>
+                                <th scope="col">Recycle Device</th>
+                                <th scope="col">Report Theft</th>
                             </tr>
                             </thead>
                             <tbody>
