@@ -1,57 +1,61 @@
 import axios from "axios";
 import {useNavigate} from "react-router-dom";
 import React from "react";
+import {MainTableContent} from "./MainTableContent";
 
-export const HomePage = () => {
+export const HomePage = (props) => {
+    const [numberOfDevices, setNumberOfDevices] = React.useState(0)
+
+    const array=[{
+        sno:1,
+        deviceManufacturer:"OnePlus",
+        deviceName:"9R"
+        },
+        {
+            sno:2,
+            deviceManufacturer:"Samsung",
+            deviceName:"Galaxy S21"
+        },
+        {
+            sno:3,
+            deviceManufacturer:"Motorola",
+            deviceName:"G3"
+        }]
 
     return (
         <>
-            <div className="container rounded bg-white mt-5 mb-5">
+            <div className="container rounded bg-white ">
                 <div className="row">
-                    <div className="col-md-3 border-right">
-                        <p>container 3 start</p>
-                        <div className="d-flex flex-column align-items-center text-center p-3 py-5"><img
-                            className="rounded-circle mt-5" width="150px"
-                            src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg"/><span
-                            className="font-weight-bold">Edogaru</span><span
-                            className="text-black-50">edogaru@mail.com.my</span><span> </span></div>
+                    <div className="col-md-3">
+                        <p>container 1 start</p>
+                        <div className="d-flex flex-column  "><img
+                            className="rounded-circle mt-5" width="250px"
+                            src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg"/>
+                            <p className="font-weight-bold">Aadhaar: {props.userAadhaarNumber}</p>
+                            <p className="font-weight-bold">Name: {props.userName}</p>
+                            <p className="font-weight-bold">Number of Devices: {numberOfDevices}</p>
+                        </div>
                     </div>
-                    <div className="col-md-5 border-right">
+                    <div className="col align-items-centre">
                         <p>container 2 start</p>
-                        <div className="p-3 py-5">
-                            <div className="d-flex justify-content-between align-items-center mb-3">
-                                <h4 className="text-right">Profile Settings</h4>
-                            </div>
-                            <div className="row mt-2">
-                                <div className="col-md-6"><label className="labels">Name</label><input type="text"
-                                                                                                       className="form-control"
-                                                                                                       placeholder="first name"/>
-                                </div>
-                                <div className="col-md-6"><label className="labels">Surname</label><input type="text"
-                                                                                                          className="form-control"
-                                                                                                          placeholder="surname"/>
-                                </div>
-                            </div>
-
-                            <div className="mt-5 text-center">
-                                <button className="btn btn-primary profile-button" type="button">Save Profile</button>
-                            </div>
+                        <div className="d-grid gap-2 d-md-flex justify-content-md-end">
+                            <button type="button" className="btn btn-outline-primary my-2 my-sm-0">Transfer Requests</button>
                         </div>
-                    </div>
-                    <div className="col-md-4">
-                        <p>container 3 start</p>
-                        <div className="p-3 py-5">
-                            <div className="d-flex justify-content-between align-items-center experience">
-                                <span>Edit Experience</span><span className="border px-3 p-1 add-experience"><i
-                                className="fa fa-plus"></i>&nbsp;Experience</span></div>
-                            <br/>
-                            <div className="col-md-12"><label className="labels">Experience in Designing</label><input
-                                type="text" className="form-control" placeholder="experience"/></div>
-                            <br/>
-                            <div className="col-md-12"><label className="labels">Additional Details</label><input
-                                type="text" className="form-control" placeholder="additional details"/>
-                            </div>
-                        </div>
+                        <table className="table">
+                            <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">First</th>
+                                <th scope="col">Last</th>
+                                <th scope="col">Handle</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {array.map((array) => {
+                                return <MainTableContent array={array}/>
+                            })}
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
