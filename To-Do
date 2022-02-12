@@ -2,3 +2,4 @@
 2. check for 12 digit adhar number
 3. if(localStorage has login data then redirect/return to home)
 4. OPT verification dummy for register page
+4. You are already registered. change password page.
