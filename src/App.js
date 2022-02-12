@@ -6,6 +6,8 @@ import {BrowserRouter as Router, Routes, Route} from "react-router-dom";
 import {LoginRegisterNavbar} from "./MyComponents/LoginRegisterNavbar";
 import {RegisterPage} from "./MyComponents/RegisterPage";
 import {HomePage} from "./MyComponents/HomePage";
+import {TransferRequestsPage} from "./MyComponents/TransferRequestsPage";
+import {AddNewDevicePage} from "./MyComponents/AddNewDevicePage";
 
 function App() {
     const [aadhaarNumber, setAadhaarNumber] = useState("")
@@ -29,6 +31,14 @@ function App() {
                            element={<>
                                <LoginRegisterNavbar/>
                                <RegisterPage/></>}/>
+                    <Route exact path="/transfer-requests"
+                           element={<>
+                               <Navbar/>
+                               <TransferRequestsPage/></>}/>
+                    <Route exact path="/add-new-device"
+                           element={<>
+                               <Navbar/>
+                               <AddNewDevicePage/></>}/>
                 </Routes>
             </Router>
         </>

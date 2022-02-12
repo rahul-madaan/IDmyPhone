@@ -8,16 +8,19 @@ export const HomePage = (props) => {
 
     const array=[{
         sno:1,
+        deviceIMEI:"1234567890",
         deviceManufacturer:"OnePlus",
         deviceName:"9R"
         },
         {
             sno:2,
+            deviceIMEI:"345634563456",
             deviceManufacturer:"Samsung",
             deviceName:"Galaxy S21"
         },
         {
             sno:3,
+            deviceIMEI:"123412341234",
             deviceManufacturer:"Motorola",
             deviceName:"G3"
         }]
@@ -39,15 +42,19 @@ export const HomePage = (props) => {
                     <div className="col align-items-centre">
                         <p>container 2 start</p>
                         <div className="d-grid gap-2 d-md-flex justify-content-md-end">
-                            <button type="button" className="btn btn-outline-primary my-2 my-sm-0">Transfer Requests</button>
+                            <button type="button" className="btn btn-outline-primary my-2 my-sm-2">Transfer Requests</button>
+                        </div>
+                        <div className="d-grid gap-2 d-md-flex justify-content-md-end">
+                            <button type="button" className="btn btn-outline-success my-2 my-sm-0">+ Add New Device</button>
                         </div>
                         <table className="table">
                             <thead>
                             <tr>
                                 <th scope="col">#</th>
-                                <th scope="col">First</th>
-                                <th scope="col">Last</th>
-                                <th scope="col">Handle</th>
+                                <th scope="col">IMEI</th>
+                                <th scope="col">Manufacturer</th>
+                                <th scope="col">Model Name</th>
+                                <th scope="col">Remove Device</th>
                             </tr>
                             </thead>
                             <tbody>

@@ -6,6 +6,7 @@ export const MainTableContent = (props) => {
         <>
             <tr>
                 <th scope="row">{props.array.sno}</th>
+                <td>{props.array.deviceIMEI}</td>
                 <td>{props.array.deviceManufacturer}</td>
                 <td>{props.array.deviceName}</td>
                 <td>Delete Button here</td>
