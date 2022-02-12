@@ -54,7 +54,7 @@ export const TransferRequestsPage = (props) => {
                                 <th scope="col">Device IMEI</th>
                                 <th scope="col">Model Name</th>
                                 <th scope="col">Transfer To</th>
-                                <th scope="col">Transfer</th>
+                                <th scope="col">Confirm Transfer</th>
                             </tr>
                             </thead>
                             <tbody>
