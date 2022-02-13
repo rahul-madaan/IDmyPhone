@@ -1,19 +1,30 @@
 import axios from "axios";
 import {useNavigate} from "react-router-dom";
 import React from "react";
-import {MainTableContent} from "./MainTableContent";
+import {HomeTableContent} from "./HomeTableContent";
+import PhoneImage from "../MyPhotos/image-removebg-preview.png"
 
 export const BookPickupPage = (props) => {
+    let navigate = useNavigate();
+    const routeChange = (path) => {
+        navigate(path);
+    }
+
+    const homeClick = (e) => {
+        e.preventDefault()
+        routeChange("/home")
+    }
 
     return (
         <>
-            <div className="container rounded bg-white ">
+            <div className="container bg-white ">
                 <div className="row">
                     <div className="col-md-3">
                         <p>container 1 start</p>
+                        <button type="button" className="btn btn-outline-dark" onClick={homeClick}>Back to Home</button>
                         <div className="d-flex flex-column  "><img
-                            className="rounded-circle mt-5 mt-5" width="250px"
-                            src="../MyPhotos/androidPhone.png"/>
+                            className=" mt-5 mt-5" width="250px"
+                            src={PhoneImage}/>
                             <p className="font-weight-bold">Manufacturer: {props.userAadhaarNumber}</p>
                             <p className="font-weight-bold">Model: {props.userName}</p>
                             <p className="font-weight-bold">Device IMEI: </p>
@@ -22,19 +33,30 @@ export const BookPickupPage = (props) => {
                     </div>
                     <div className="col align-items-centre">
                         <p>container 2 start</p>
-                        <h3>Linked Devices</h3>
-                        <table className="table">
-                            <thead>
-                            <tr>
-                                <th scope="col">#</th>
-                                <th scope="col">Device IMEI</th>
-                                <th scope="col">Manufacturer</th>
-                                <th scope="col">Model Name</th>
-                                <th scope="col">Recycle Device</th>
-                                <th scope="col">Report Theft</th>
-                            </tr>
-                            </thead>
-                        </table>
+                        <h3>Book Pickup</h3>
+                        <h5>Enter Address</h5>
+                        <form>
+                            <div className="form-group">
+                                <label htmlFor="exampleInputEmail1">Address</label>
+                                <input type="text" className="form-control" id="exampleInputEmail1"
+                                       aria-describedby="emailHelp" placeholder="Enter Address"/>
+                            </div>
+                            <div className="form-group">
+                                <label htmlFor="exampleInputPassword1">City</label>
+                                <input type="text" className="form-control" id="exampleInputPassword1"
+                                       placeholder="Enter City"/>
+                            </div>
+                            <div className="form-group">
+                                <label htmlFor="exampleInputPassword1">PINCODE</label>
+                                <input type="Number" className="form-control" id="exampleInputPassword1"
+                                       placeholder="Enter PINCODE"/>
+                            </div>
+                            <div className="form-group form-check">
+                                <input type="checkbox" className="form-check-input" id="exampleCheck1"/>
+                                <label className="form-check-label" htmlFor="exampleCheck1">Check me out</label>
+                            </div>
+                            <button type="button" className="btn btn-warning">Request Pickup</button>
+                        </form>
                     </div>
                 </div>
             </div>

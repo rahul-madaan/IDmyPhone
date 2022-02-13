@@ -1,7 +1,7 @@
 import axios from "axios";
 import {useNavigate} from "react-router-dom";
 import React from "react";
-import {MainTableContent} from "./MainTableContent";
+import {HomeTableContent} from "./HomeTableContent";
 
 export const ReportTheftPage = (props) => {
     const [numberOfDevices, setNumberOfDevices] = React.useState(0)
@@ -55,7 +55,7 @@ export const ReportTheftPage = (props) => {
                             </thead>
                             <tbody>
                             {array.map((array) => {
-                                return <MainTableContent array={array}/>
+                                return <HomeTableContent array={array}/>
                             })}
                             </tbody>
                         </table>
