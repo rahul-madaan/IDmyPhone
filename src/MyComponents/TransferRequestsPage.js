@@ -46,6 +46,9 @@ export const TransferRequestsPage = (props) => {
                     </div>
                     <div className="col align-items-centre">
                         <p>container 2 start</p>
+                        <div className="d-grid gap-2 d-md-flex justify-content-md-end">
+                            <button type="button" className="btn btn-warning my-2 mx-3">Active Transfer Requests</button>
+                        </div>
                         <h3>Transfer Requests</h3>
                         <table className="table">
                             <thead>

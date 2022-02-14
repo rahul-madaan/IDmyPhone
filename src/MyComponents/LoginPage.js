@@ -13,12 +13,12 @@ export const LoginPage = (props) => {
     const loginSubmit = (e) => {
         e.preventDefault()
         axios.post("http://localhost:8000/login", {
-            'aadhaarNumber': props.aadhaarNumber,
+            'aadhaar_number': props.aadhaarNumber,
             'password': props.password
         }).then((result) => {
-            console.log(result)
             if (result.data.statusCode === 0) {
                 setWarning(false)
+                props.setUserAadhaarNumber(props.aadhaarNumber)
                 routeChange('/home')
             } else if (result.data.statusCode === 1) {
                 console.log("Passwords do not match")

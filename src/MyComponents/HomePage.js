@@ -1,28 +1,34 @@
 import axios from "axios";
 import {useNavigate} from "react-router-dom";
-import React from "react";
+import React, {useEffect, useLayoutEffect} from "react";
 import {HomeTableContent} from "./HomeTableContent";
+
+
+
 
 export const HomePage = (props) => {
 
-    const array=[{
-        sno:1,
-        deviceIMEI:"1234567890",
-        deviceManufacturer:"OnePlus",
-        deviceName:"9R"
-        },
-        {
-            sno:2,
-            deviceIMEI:"345634563456",
-            deviceManufacturer:"Samsung",
-            deviceName:"Galaxy S21"
-        },
-        {
-            sno:3,
-            deviceIMEI:"123412341234",
-            deviceManufacturer:"Motorola",
-            deviceName:"G3"
-        }]
+    const [linkedDevices, setLinkedDevices] = React.useState([])
+
+
+    const getLinkedDevices = (userAadhaarNumber) => {
+        axios.post("http://localhost:8000/get-linked-devices", {
+            'user_aadhaar_number': userAadhaarNumber
+        }).then((result) => {
+            console.log(result)
+            if (result.data) {
+                setLinkedDevices(result.data)
+            }
+        })
+    }
+
+
+    useLayoutEffect(() => {
+        getLinkedDevices(props.userAadhaarNumber)
+    }, []);
+
+
+
 
     return (
         <>
@@ -53,8 +59,8 @@ export const HomePage = (props) => {
                             </tr>
                             </thead>
                             <tbody>
-                            {array.map((array) => {
-                                return <HomeTableContent array={array}/>
+                            {linkedDevices.map((linkedDevice) => {
+                                return <HomeTableContent linkedDevice={linkedDevice}/>
                             })}
                             </tbody>
                         </table>

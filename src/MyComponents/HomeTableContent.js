@@ -16,10 +16,10 @@ export const HomeTableContent = (props) => {
 
         <>
             <tr>
-                <th scope="row">{props.array.sno}</th>
-                <td>{props.array.deviceIMEI}</td>
-                <td>{props.array.deviceManufacturer}</td>
-                <td>{props.array.deviceName}</td>
+                <th scope="row">1</th>
+                <td>{props.linkedDevice.IMEI}</td>
+                <td>{props.linkedDevice.manufacturer}</td>
+                <td>{props.linkedDevice.model_name}</td>
                 <td><button type="button" className="btn btn-outline-success " onClick={bookPickupClick}>Book Pickup</button></td>
                 <td><button type="button" className="btn btn-outline-danger ">Report Theft</button></td>
             </tr>

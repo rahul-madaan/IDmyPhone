@@ -26,10 +26,14 @@ function App() {
                     <Route exact path="/login"
                            element={<><LoginRegisterNavbar/>
                                <LoginPage aadhaarNumber={aadhaarNumber}
-                                               setAadhaarNumber={setAadhaarNumber}
-                                               password={password}
-                                               setPassword={setPassword}/></>}/>
-                    <Route exact path="/home" element={<><Navbar/><HomePage userName={userName} userAadhaarNumber={userAadhaarNumber} numberOfDevices={numberOfDevices}/></>}/>
+                                          setAadhaarNumber={setAadhaarNumber}
+                                          password={password}
+                                          setPassword={setPassword}
+                                          userAadhaarNumber={userAadhaarNumber}
+                                          setUserAadhaarNumber={setUserAadhaarNumber}/></>}/>
+                    <Route exact path="/home"
+                           element={<><Navbar/><HomePage userName={userName} userAadhaarNumber={userAadhaarNumber}
+                                                         numberOfDevices={numberOfDevices}/></>}/>
                     <Route exact path="/register"
                            element={<>
                                <LoginRegisterNavbar/>
@@ -37,11 +41,13 @@ function App() {
                     <Route exact path="/transfer-requests"
                            element={<>
                                <Navbar/>
-                               <TransferRequestsPage userName={userName} userAadhaarNumber={userAadhaarNumber} numberOfDevices={numberOfDevices}/></>}/>
+                               <TransferRequestsPage userName={userName} userAadhaarNumber={userAadhaarNumber}
+                                                     numberOfDevices={numberOfDevices}/></>}/>
                     <Route exact path="/add-new-device"
                            element={<>
                                <Navbar/>
-                               <AddNewDevicePage userName={userName} userAadhaarNumber={userAadhaarNumber} numberOfDevices={numberOfDevices}/></>}/>
+                               <AddNewDevicePage userName={userName} userAadhaarNumber={userAadhaarNumber}
+                                                 numberOfDevices={numberOfDevices}/></>}/>
                     <Route exact path="/book-pickup"
                            element={<>
                                <Navbar/>
