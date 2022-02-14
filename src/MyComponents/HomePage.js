@@ -1,6 +1,6 @@
 import axios from "axios";
 import {useNavigate} from "react-router-dom";
-import React, {useEffect, useLayoutEffect} from "react";
+import React, {useLayoutEffect, useState} from "react";
 import {HomeTableContent} from "./HomeTableContent";
 
 
@@ -8,7 +8,10 @@ import {HomeTableContent} from "./HomeTableContent";
 
 export const HomePage = (props) => {
 
-    const getLinkedDevices = (userAadhaarNumber) => {
+    const [selectedDeviceDetails, setSelectedDeviceDetails] = useState({})
+
+
+    const fetchLinkedDevices = (userAadhaarNumber,updateUserName) => {
         axios.post("http://localhost:8000/get-linked-devices", {
             'user_aadhaar_number': userAadhaarNumber
         }).then((result) => {
@@ -16,10 +19,11 @@ export const HomePage = (props) => {
             if (result.data) {
                 props.setUserLinkedDevices(result.data)
             }
+            updateUserName(userAadhaarNumber)
         })
     }
 
-    const updateUserName = (userAadhaarNumber,updateUserName) => {
+    const updateUserName = (userAadhaarNumber) => {
         axios.post("http://localhost:8000/get-user-name", {
             'user_aadhaar_number': userAadhaarNumber
         }).then((result) => {
@@ -27,13 +31,23 @@ export const HomePage = (props) => {
             if (result.data) {
                 props.setUserName(result.data[0].name)
             }
-            updateUserName()
+        })
+    }
+
+    const fetchDeviceDetails = (IMEI) => {
+        axios.post("http://localhost:8000/fetch-device-details/" + IMEI, {
+            'user_aadhaar_number': 0
+        }).then((result) => {
+            console.log(result)
+            if (result.data !== []) {
+                setSelectedDeviceDetails(result.data[0])
+            }
         })
     }
 
 
     useLayoutEffect(() => {
-        getLinkedDevices(props.userAadhaarNumber,updateUserName)
+        fetchLinkedDevices(props.userAadhaarNumber,updateUserName)
     }, []);
 
 
@@ -69,7 +83,7 @@ export const HomePage = (props) => {
                             </thead>
                             <tbody>
                             {props.userLinkedDevices.map((linkedDevice,index) => {
-                                return <HomeTableContent linkedDevice={linkedDevice} index={index}/>
+                                return <HomeTableContent linkedDevice={linkedDevice} index={index} setSelectedDeviceDetails={setSelectedDeviceDetails}  />
                             })}
                             </tbody>
                         </table>
