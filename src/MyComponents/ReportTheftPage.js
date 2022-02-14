@@ -4,7 +4,6 @@ import React from "react";
 import {HomeTableContent} from "./HomeTableContent";
 
 export const ReportTheftPage = (props) => {
-    const [numberOfDevices, setNumberOfDevices] = React.useState(0)
 
     const array=[{
         sno:1,
@@ -36,7 +35,7 @@ export const ReportTheftPage = (props) => {
                             src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg"/>
                             <p className="font-weight-bold">Aadhaar: {props.userAadhaarNumber}</p>
                             <p className="font-weight-bold">Name: {props.userName}</p>
-                            <p className="font-weight-bold">Number of Devices: {numberOfDevices}</p>
+                            <p className="font-weight-bold">Number of Devices:{46647}</p>
                         </div>
                     </div>
                     <div className="col align-items-centre">

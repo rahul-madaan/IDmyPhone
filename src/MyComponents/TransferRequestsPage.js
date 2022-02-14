@@ -41,7 +41,7 @@ export const TransferRequestsPage = (props) => {
                             src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg"/>
                             <p className="font-weight-bold">Aadhaar: {props.userAadhaarNumber}</p>
                             <p className="font-weight-bold">Name: {props.userName}</p>
-                            <p className="font-weight-bold">Number of Devices: {props.numberOfDevices}</p>
+                            <p className="font-weight-bold">Number of Devices: {props.userLinkedDevices.length}</p>
                         </div>
                     </div>
                     <div className="col align-items-centre">

@@ -8,16 +8,13 @@ import {HomeTableContent} from "./HomeTableContent";
 
 export const HomePage = (props) => {
 
-    const [linkedDevices, setLinkedDevices] = React.useState([])
-
-
     const getLinkedDevices = (userAadhaarNumber) => {
         axios.post("http://localhost:8000/get-linked-devices", {
             'user_aadhaar_number': userAadhaarNumber
         }).then((result) => {
             console.log(result)
             if (result.data) {
-                setLinkedDevices(result.data)
+                props.setUserLinkedDevices(result.data)
             }
         })
     }
@@ -41,7 +38,7 @@ export const HomePage = (props) => {
                             src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg"/>
                             <p className="font-weight-bold">Aadhaar: {props.userAadhaarNumber}</p>
                             <p className="font-weight-bold">Name: {props.userName}</p>
-                            <p className="font-weight-bold">Number of Devices: {props.numberOfDevices}</p>
+                            <p className="font-weight-bold">Number of Devices: {props.userLinkedDevices.length}</p>
                         </div>
                     </div>
                     <div className="col align-items-centre">
@@ -59,7 +56,7 @@ export const HomePage = (props) => {
                             </tr>
                             </thead>
                             <tbody>
-                            {linkedDevices.map((linkedDevice,index) => {
+                            {props.userLinkedDevices.map((linkedDevice,index) => {
                                 return <HomeTableContent linkedDevice={linkedDevice} index={index}/>
                             })}
                             </tbody>
