@@ -16,7 +16,7 @@ export const HomeTableContent = (props) => {
 
         <>
             <tr>
-                <th scope="row">1</th>
+                <th scope="row">{props.index + 1}</th>
                 <td>{props.linkedDevice.IMEI}</td>
                 <td>{props.linkedDevice.manufacturer}</td>
                 <td>{props.linkedDevice.model_name}</td>

@@ -59,8 +59,8 @@ export const HomePage = (props) => {
                             </tr>
                             </thead>
                             <tbody>
-                            {linkedDevices.map((linkedDevice) => {
-                                return <HomeTableContent linkedDevice={linkedDevice}/>
+                            {linkedDevices.map((linkedDevice,index) => {
+                                return <HomeTableContent linkedDevice={linkedDevice} index={index}/>
                             })}
                             </tbody>
                         </table>
