@@ -19,9 +19,21 @@ export const HomePage = (props) => {
         })
     }
 
+    const updateUserName = (userAadhaarNumber,updateUserName) => {
+        axios.post("http://localhost:8000/get-user-name", {
+            'user_aadhaar_number': userAadhaarNumber
+        }).then((result) => {
+            console.log(result)
+            if (result.data) {
+                props.setUserName(result.data[0].name)
+            }
+            updateUserName()
+        })
+    }
+
 
     useLayoutEffect(() => {
-        getLinkedDevices(props.userAadhaarNumber)
+        getLinkedDevices(props.userAadhaarNumber,updateUserName)
     }, []);
 
 
