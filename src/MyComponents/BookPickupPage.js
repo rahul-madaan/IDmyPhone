@@ -25,10 +25,9 @@ export const BookPickupPage = (props) => {
                         <div className="d-flex flex-column  "><img
                             className=" mt-5 mt-5" width="250px"
                             src={PhoneImage}/>
-                            <p className="font-weight-bold">Manufacturer: {props.userAadhaarNumber}</p>
-                            <p className="font-weight-bold">Model: {props.userName}</p>
-                            <p className="font-weight-bold">Device IMEI: </p>
-                            <p className="font-weight-bold">Purchase Date: </p>
+                            <p className="font-weight-bold">Manufacturer: {props.selectedDeviceDetails.manufacturer}</p>
+                            <p className="font-weight-bold">Model: {props.selectedDeviceDetails.model_name}</p>
+                            <p className="font-weight-bold">Device IMEI: {props.selectedDeviceDetails.IMEI} </p>
                         </div>
                     </div>
                     <div className="col align-items-centre">

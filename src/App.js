@@ -17,7 +17,7 @@ function App() {
     const [userName, setUserName] = React.useState("Demo") //after login
     const [userAadhaarNumber, setUserAadhaarNumber] = React.useState("111111111111") //after login
     const [userLinkedDevices, setUserLinkedDevices] = React.useState([])
-
+    const [selectedDeviceDetails, setSelectedDeviceDetails] = useState({})
 
     return (
         <>
@@ -37,7 +37,8 @@ function App() {
                                          userAadhaarNumber={userAadhaarNumber}
                                          setUserName={setUserName}
                                          userLinkedDevices={userLinkedDevices}
-                                         setUserLinkedDevices={setUserLinkedDevices}/></>}/>
+                                         setUserLinkedDevices={setUserLinkedDevices}
+                                         setSelectedDeviceDetails={setSelectedDeviceDetails}/></>}/>
                     <Route exact path="/register"
                            element={<>
                                <LoginRegisterNavbar/>
@@ -57,7 +58,7 @@ function App() {
                     <Route exact path="/book-pickup"
                            element={<>
                                <Navbar/>
-                               <BookPickupPage/></>}/>
+                               <BookPickupPage selectedDeviceDetails={selectedDeviceDetails}/></>}/>
                     <Route exact path="/report-theft"
                            element={<>
                                <Navbar/>

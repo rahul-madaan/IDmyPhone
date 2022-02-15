@@ -8,9 +8,6 @@ import {HomeTableContent} from "./HomeTableContent";
 
 export const HomePage = (props) => {
 
-    const [selectedDeviceDetails, setSelectedDeviceDetails] = useState({})
-
-
     const fetchLinkedDevices = (userAadhaarNumber,updateUserName) => {
         axios.post("http://localhost:8000/get-linked-devices", {
             'user_aadhaar_number': userAadhaarNumber
@@ -34,16 +31,7 @@ export const HomePage = (props) => {
         })
     }
 
-    const fetchDeviceDetails = (IMEI) => {
-        axios.post("http://localhost:8000/fetch-device-details/" + IMEI, {
-            'user_aadhaar_number': 0
-        }).then((result) => {
-            console.log(result)
-            if (result.data !== []) {
-                setSelectedDeviceDetails(result.data[0])
-            }
-        })
-    }
+
 
 
     useLayoutEffect(() => {
@@ -83,7 +71,7 @@ export const HomePage = (props) => {
                             </thead>
                             <tbody>
                             {props.userLinkedDevices.map((linkedDevice,index) => {
-                                return <HomeTableContent linkedDevice={linkedDevice} index={index} setSelectedDeviceDetails={setSelectedDeviceDetails}  />
+                                return <HomeTableContent linkedDevice={linkedDevice} index={index} setSelectedDeviceDetails={props.setSelectedDeviceDetails}  />
                             })}
                             </tbody>
                         </table>
