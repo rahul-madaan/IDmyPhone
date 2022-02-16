@@ -1,8 +1,28 @@
 import axios from "axios";
-import {useNavigate} from "react-router-dom";
-import React from "react";
+import React, {useState} from "react";
 
 export const AddNewDevicePage = (props) => {
+
+    const [sellerAadhaar, setSellerAadhaar] = useState("")
+    const [goodDeviceDetails, setGoodDeviceDetails] = useState({})
+    const [IMEIofGood, setIMEIofGood] = useState("")
+    const [goodDeviceOwnerDetails, setGoodDeviceOwnerDetails] = useState({})
+    const [warningContent, setWarningContent] = React.useState("")
+
+    const clickCheckAvailability = (e) => {
+        e.preventDefault()
+        axios.post("http://localhost:8000/verify-owner", {
+            'seller_aadhaar': sellerAadhaar,
+            'IMEI': IMEIofGood
+        }).then(result => {
+            setGoodDeviceDetails(result.data[0])
+            axios.post("http://localhost:8000/get-user-name",{
+                'user_aadhaar_number': sellerAadhaar
+            }).then(res => {
+                setGoodDeviceOwnerDetails(res.data[0])
+            })
+        })
+    }
 
     return (
         <>
@@ -23,16 +43,19 @@ export const AddNewDevicePage = (props) => {
                         <h3>+ Add New Device</h3>
                         <form>
                             <div className="form-group my-2">
-                                <label htmlFor="exampleInputEmail1">Seller's Aadhaar Number</label>
-                                <input type="text" className="form-control" id="exampleInputEmail1"
-                                       aria-describedby="emailHelp" placeholder="Enter seller's Aadhaar Number"/>
+                                <label>Seller's Aadhaar Number</label>
+                                <input type="text" className="form-control" value={sellerAadhaar} onChange={(e) => {
+                                    setSellerAadhaar(e.target.value)
+                                }} placeholder="Enter seller's Aadhaar Number"/>
                             </div>
                             <div className="form-group my-2">
-                                <label htmlFor="exampleInputPassword1">Device IMEI</label>
-                                <input type="text" className="form-control" id="exampleInputPassword1"
-                                       placeholder="Enter IMEI of device being bought"/>
+                                <label>Device IMEI</label>
+                                <input type="text" className="form-control"
+                                       value={IMEIofGood} onChange={(e) => {
+                                    setIMEIofGood(e.target.value)
+                                }}placeholder="Enter IMEI of device being bought"/>
                             </div>
-                            <button type="button" className="btn btn-warning my-3">Check Availability</button>
+                            <button type="button" className="btn btn-warning my-3" onClick={clickCheckAvailability}>Check Availability</button>
                         </form>
 
                         <div className="alert alert-danger" role="alert">
@@ -40,9 +63,9 @@ export const AddNewDevicePage = (props) => {
                         </div>
 
                         <p className="font-weight-bold">Status: Available, Already requested,</p>
-                        <p className="font-weight-bold">Owner Name: Dummy Madan</p>
-                        <p className="font-weight-bold">Device: Dummy Dum8</p>
-                        <p className="font-weight-bold">IMEI: Dummy IMEI</p>
+                        <p className="font-weight-bold">Owner Name: {goodDeviceOwnerDetails.name}</p>
+                        <p className="font-weight-bold">Device: {goodDeviceDetails.manufacturer} {goodDeviceDetails.model_name}</p>
+                        <p className="font-weight-bold">IMEI: {goodDeviceDetails.IMEI}</p>
 
                         <button type="button" className="btn btn-success my-3">Request Transfer</button>
                     </div>
