@@ -22,24 +22,29 @@ export const AddNewDevicePage = (props) => {
                         <p>container 2 start</p>
                         <h3>+ Add New Device</h3>
                         <form>
-                            <div className="form-group">
-                                <label htmlFor="exampleInputEmail1">Email address</label>
+                            <div className="form-group my-2">
+                                <label htmlFor="exampleInputEmail1">Seller's e-mail address</label>
                                 <input type="email" className="form-control" id="exampleInputEmail1"
-                                       aria-describedby="emailHelp" placeholder="Enter email"/>
-                                <small id="emailHelp" className="form-text text-muted">We'll never share your email
-                                    with anyone else.</small>
+                                       aria-describedby="emailHelp" placeholder="Enter seller's email"/>
                             </div>
-                            <div className="form-group">
-                                <label htmlFor="exampleInputPassword1">Password</label>
+                            <div className="form-group my-2">
+                                <label htmlFor="exampleInputPassword1">Device Email ID</label>
                                 <input type="password" className="form-control" id="exampleInputPassword1"
-                                       placeholder="Password"/>
+                                       placeholder="Enter IMEI of device being bought"/>
                             </div>
-                            <div className="form-group form-check">
-                                <input type="checkbox" className="form-check-input" id="exampleCheck1"/>
-                                <label className="form-check-label" htmlFor="exampleCheck1">Check me out</label>
-                            </div>
-                            <button type="button" className="btn btn-warning">Request Transfer</button>
+                            <button type="button" className="btn btn-warning my-3">Check Availability</button>
                         </form>
+
+                        <div className="alert alert-danger" role="alert">
+                            Warning here
+                        </div>
+
+                        <p className="font-weight-bold">Status: Available, Already requested,</p>
+                        <p className="font-weight-bold">Owner Name: Dummy Madan</p>
+                        <p className="font-weight-bold">Device: Dummy Dum8</p>
+                        <p className="font-weight-bold">IMEI: Dummy IMEI</p>
+
+                        <button type="button" className="btn btn-success my-3">Request Transfer</button>
                     </div>
                 </div>
             </div>
