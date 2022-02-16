@@ -23,13 +23,13 @@ export const AddNewDevicePage = (props) => {
                         <h3>+ Add New Device</h3>
                         <form>
                             <div className="form-group my-2">
-                                <label htmlFor="exampleInputEmail1">Seller's e-mail address</label>
-                                <input type="email" className="form-control" id="exampleInputEmail1"
-                                       aria-describedby="emailHelp" placeholder="Enter seller's email"/>
+                                <label htmlFor="exampleInputEmail1">Seller's Aadhaar Number</label>
+                                <input type="text" className="form-control" id="exampleInputEmail1"
+                                       aria-describedby="emailHelp" placeholder="Enter seller's Aadhaar Number"/>
                             </div>
                             <div className="form-group my-2">
-                                <label htmlFor="exampleInputPassword1">Device Email ID</label>
-                                <input type="password" className="form-control" id="exampleInputPassword1"
+                                <label htmlFor="exampleInputPassword1">Device IMEI</label>
+                                <input type="text" className="form-control" id="exampleInputPassword1"
                                        placeholder="Enter IMEI of device being bought"/>
                             </div>
                             <button type="button" className="btn btn-warning my-3">Check Availability</button>
