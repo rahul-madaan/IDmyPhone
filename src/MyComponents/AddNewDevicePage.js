@@ -10,7 +10,7 @@ export const AddNewDevicePage = (props) => {
     const [warningContent, setWarningContent] = React.useState("")
     const [availabilityStatus, setAvailabilityStatus] = useState("")
 
-    const clickCheckAvailability = (e, displayWarningOrResult) => {
+    const clickCheckAvailability = (e) => {
         e.preventDefault()
         axios.post("http://localhost:8000/verify-owner", {
             'seller_aadhaar': sellerAadhaar,
@@ -59,7 +59,7 @@ export const AddNewDevicePage = (props) => {
                                 }} placeholder="Enter IMEI of device being bought"/>
                             </div>
                             <button type="button" className="btn btn-warning my-3"
-                                    onClick={(e) => clickCheckAvailability(e, displayWarningOrResult)}>Check
+                                    onClick={(e) => clickCheckAvailability(e)}>Check
                                 Availability
                             </button>
                         </form>
