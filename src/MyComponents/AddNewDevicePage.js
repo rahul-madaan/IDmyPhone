@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, {useState} from "react";
+import React, {useCallback, useState} from "react";
 
 export const AddNewDevicePage = (props) => {
 
@@ -8,15 +8,18 @@ export const AddNewDevicePage = (props) => {
     const [IMEIofGood, setIMEIofGood] = useState("")
     const [goodDeviceOwnerDetails, setGoodDeviceOwnerDetails] = useState({})
     const [warningContent, setWarningContent] = React.useState("")
+    const [availabilityStatus, setAvailabilityStatus] = useState("")
 
-    const clickCheckAvailability = (e) => {
+    const clickCheckAvailability = (e, displayWarningOrResult) => {
         e.preventDefault()
         axios.post("http://localhost:8000/verify-owner", {
             'seller_aadhaar': sellerAadhaar,
             'IMEI': IMEIofGood
         }).then(result => {
+            // console.log("result= " + JSON.stringify(result))
             setGoodDeviceDetails(result.data[0])
-            axios.post("http://localhost:8000/get-user-name",{
+
+            axios.post("http://localhost:8000/get-user-name", {
                 'user_aadhaar_number': sellerAadhaar
             }).then(res => {
                 setGoodDeviceOwnerDetails(res.data[0])
@@ -53,21 +56,26 @@ export const AddNewDevicePage = (props) => {
                                 <input type="text" className="form-control"
                                        value={IMEIofGood} onChange={(e) => {
                                     setIMEIofGood(e.target.value)
-                                }}placeholder="Enter IMEI of device being bought"/>
+                                }} placeholder="Enter IMEI of device being bought"/>
                             </div>
-                            <button type="button" className="btn btn-warning my-3" onClick={clickCheckAvailability}>Check Availability</button>
+                            <button type="button" className="btn btn-warning my-3"
+                                    onClick={(e) => clickCheckAvailability(e, displayWarningOrResult)}>Check
+                                Availability
+                            </button>
                         </form>
+                        {goodDeviceDetails.status_code !== 0 ?
+                            <div className="alert alert-danger" role="alert">
+                                {warningContent}
+                            </div> :
+                            <>
+                                <p className="font-weight-bold">Status: Available, Already requested,</p>
+                                <p className="font-weight-bold">Owner Name: {goodDeviceOwnerDetails.name}</p>
+                                <p className="font-weight-bold">Device: {goodDeviceDetails.manufacturer} {goodDeviceDetails.model_name}</p>
+                                <p className="font-weight-bold">IMEI: {goodDeviceDetails.IMEI}</p>
 
-                        <div className="alert alert-danger" role="alert">
-                            Warning here
-                        </div>
-
-                        <p className="font-weight-bold">Status: Available, Already requested,</p>
-                        <p className="font-weight-bold">Owner Name: {goodDeviceOwnerDetails.name}</p>
-                        <p className="font-weight-bold">Device: {goodDeviceDetails.manufacturer} {goodDeviceDetails.model_name}</p>
-                        <p className="font-weight-bold">IMEI: {goodDeviceDetails.IMEI}</p>
-
-                        <button type="button" className="btn btn-success my-3">Request Transfer</button>
+                                <button type="button" className="btn btn-success my-3">Request Transfer</button>
+                            </>
+                        }
                     </div>
                 </div>
             </div>
