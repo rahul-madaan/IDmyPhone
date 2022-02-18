@@ -1,8 +1,51 @@
 import axios from "axios";
-import {useNavigate} from "react-router-dom";
-import React from "react";
+import React, {useCallback, useEffect, useState} from "react";
 
 export const AddNewDevicePage = (props) => {
+
+    const [sellerAadhaar, setSellerAadhaar] = useState("")
+    const [goodDeviceDetails, setGoodDeviceDetails] = useState({})
+    const [IMEIofGood, setIMEIofGood] = useState("")
+    const [goodDeviceOwnerDetails, setGoodDeviceOwnerDetails] = useState({})
+    const [warningContent, setWarningContent] = React.useState("")
+    const [availabilityOrErrorStatus, setAvailabilityOrErrorStatus] = useState(false)
+
+    const clickCheckAvailability = (e,updateWarningContentCallback) => {
+        e.preventDefault()
+        axios.post("http://localhost:8000/verify-owner", {
+            'seller_aadhaar': sellerAadhaar,
+            'IMEI': IMEIofGood
+        }).then(result => {
+            // console.log("result= " + JSON.stringify(result))
+            setGoodDeviceDetails(result.data[0])
+
+            axios.post("http://localhost:8000/get-user-name", {
+                'user_aadhaar_number': sellerAadhaar
+            }).then(res => {
+                setGoodDeviceOwnerDetails(res.data[0])
+                setAvailabilityOrErrorStatus(true)
+
+            })
+        })
+    }
+
+    const updateWarningContent =()=>{
+        console.log("updateWarningCOntent: goodDeviceDetails: " + JSON.stringify(goodDeviceDetails))
+        if(goodDeviceDetails.status_code===1){
+            setWarningContent("No such device exists, please check IMEI")
+        }
+        if(goodDeviceDetails.status_code===0){
+            setWarningContent("No warning")
+        }
+    }
+
+    useEffect(() => {
+        // Update the document title using the browser API
+        updateWarningContent()
+        if(sellerAadhaar ==="" && IMEIofGood===""){
+            setAvailabilityOrErrorStatus(false)
+        }
+    });
 
     return (
         <>
@@ -22,24 +65,37 @@ export const AddNewDevicePage = (props) => {
                         <p>container 2 start</p>
                         <h3>+ Add New Device</h3>
                         <form>
-                            <div className="form-group">
-                                <label htmlFor="exampleInputEmail1">Email address</label>
-                                <input type="email" className="form-control" id="exampleInputEmail1"
-                                       aria-describedby="emailHelp" placeholder="Enter email"/>
-                                <small id="emailHelp" className="form-text text-muted">We'll never share your email
-                                    with anyone else.</small>
+                            <div className="form-group my-2">
+                                <label>Seller's Aadhaar Number</label>
+                                <input type="text" className="form-control" value={sellerAadhaar} onChange={(e) => {
+                                    setSellerAadhaar(e.target.value)
+                                }} placeholder="Enter seller's Aadhaar Number"/>
                             </div>
-                            <div className="form-group">
-                                <label htmlFor="exampleInputPassword1">Password</label>
-                                <input type="password" className="form-control" id="exampleInputPassword1"
-                                       placeholder="Password"/>
+                            <div className="form-group my-2">
+                                <label>Device IMEI</label>
+                                <input type="text" className="form-control"
+                                       value={IMEIofGood} onChange={(e) => {
+                                    setIMEIofGood(e.target.value)
+                                }} placeholder="Enter IMEI of device being bought"/>
                             </div>
-                            <div className="form-group form-check">
-                                <input type="checkbox" className="form-check-input" id="exampleCheck1"/>
-                                <label className="form-check-label" htmlFor="exampleCheck1">Check me out</label>
-                            </div>
-                            <button type="button" className="btn btn-warning">Request Transfer</button>
+                            <button type="button" className="btn btn-warning my-3"
+                                    onClick={(e)=>clickCheckAvailability(e, updateWarningContent)}>Check Availability
+                            </button>
                         </form>
+                        {/*{sellerAadhaar !=="" && IMEIofGood!==""? <>{setAvailabilityOrErrorStatus(false)}</>:""}*/}
+                        {availabilityOrErrorStatus?(goodDeviceDetails.status_code !== 0 ?
+                            <div className="alert alert-danger" role="alert">
+                                {warningContent}
+                            </div> :
+                            <>
+                                <p className="font-weight-bold">Status: Available</p>
+                                <p className="font-weight-bold">Owner Name: {goodDeviceOwnerDetails.name}</p>
+                                <p className="font-weight-bold">Device: {goodDeviceDetails.manufacturer} {goodDeviceDetails.model_name}</p>
+                                <p className="font-weight-bold">IMEI: {goodDeviceDetails.IMEI}</p>
+
+                                <button type="button" className="btn btn-success my-3">Request Transfer</button>
+                            </>
+                            ):null}
                     </div>
                 </div>
             </div>

@@ -2,7 +2,7 @@ import './App.css';
 import {LoginPage} from "./MyComponents/LoginPage";
 import {Navbar} from "./MyComponents/Navbar";
 import React, {useState} from "react";
-import {BrowserRouter as Router, Routes, Route} from "react-router-dom";
+import {BrowserRouter as Router, Routes, Route, Navigate} from "react-router-dom";
 import {LoginRegisterNavbar} from "./MyComponents/LoginRegisterNavbar";
 import {RegisterPage} from "./MyComponents/RegisterPage";
 import {HomePage} from "./MyComponents/HomePage";
@@ -63,6 +63,7 @@ function App() {
                            element={<>
                                <Navbar/>
                                <ReportTheftPage/></>}/>
+                    <Route exact path="/" element={<Navigate to="/login" />} />
                 </Routes>
             </Router>
         </>
