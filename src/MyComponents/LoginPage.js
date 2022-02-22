@@ -49,7 +49,7 @@ export const LoginPage = (props) => {
                         props.setPassword(e.target.value)
                     }} className="form-control" id="exampleInputPassword1"/>
                 </div>
-                <button type="submit" className="btn btn-primary">Log in</button>
+                <button type="submit" className="btn btn-danger">Log in</button>
             </form>
             {showWarning ?
                 <div className="alert alert-danger" role="alert">
