@@ -35,7 +35,7 @@ export const HomeTableContent = (props) => {
                 <td>{props.linkedDevice.manufacturer}</td>
                 <td>{props.linkedDevice.model_name}</td>
                 <td><button type="button" className="btn btn-outline-success " onClick={bookPickupClick} value={props.linkedDevice.IMEI}>Book Pickup</button></td>
-                <td><button type="button" className="btn btn-outline-danger ">Report Theft</button></td>
+                <td><button type="button" className="btn btn-outline-danger ">Report Loss</button></td>
             </tr>
         </>
     )
