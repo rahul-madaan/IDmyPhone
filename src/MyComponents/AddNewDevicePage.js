@@ -40,7 +40,6 @@ export const AddNewDevicePage = (props) => {
     }
 
     useEffect(() => {
-        // Update the document title using the browser API
         updateWarningContent()
         if(sellerAadhaar ==="" && IMEIofGood===""){
             setAvailabilityOrErrorStatus(false)
