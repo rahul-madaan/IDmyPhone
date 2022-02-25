@@ -3,9 +3,9 @@
 3. if(localStorage has login data then redirect/return to home)
 4. OPT verification dummy for register page
 5. You are already registered. change password page.
-6. Redirect to /login at beginning
-
-
+6. Redirect to /login at beginning ===> DONE
+7. if localStorage has login data then redirect to home
+8. Email verification OTP
 
 
 

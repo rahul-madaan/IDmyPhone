@@ -30,7 +30,6 @@ export const LoginPage = (props) => {
             }
         })
     }
-    // if(localStorage has login data then redirect/return to home)
 
     return (
         <div className="mx-5">
