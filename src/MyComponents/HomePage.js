@@ -39,8 +39,6 @@ export const HomePage = (props) => {
     }, []);
 
 
-
-
     return (
         <>
             <div className="container rounded bg-white ">
