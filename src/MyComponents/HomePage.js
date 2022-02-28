@@ -31,9 +31,6 @@ export const HomePage = (props) => {
         })
     }
 
-
-
-
     useLayoutEffect(() => {
         fetchLinkedDevices(props.userAadhaarNumber,updateUserName)
     }, []);
