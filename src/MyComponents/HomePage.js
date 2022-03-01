@@ -4,8 +4,6 @@ import React, {useLayoutEffect, useState} from "react";
 import {HomeTableContent} from "./HomeTableContent";
 
 
-
-
 export const HomePage = (props) => {
 
     const fetchLinkedDevices = (userAadhaarNumber,updateUserName) => {
