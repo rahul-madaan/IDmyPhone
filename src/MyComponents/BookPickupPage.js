@@ -16,6 +16,14 @@ export const BookPickupPage = (props) => {
         routeChange("/home")
     }
 
+    const bookPickupClick = (e) => {
+        e.preventDefault()
+        axios.post("http://localhost:8000/login", {
+            'aadhaar_number': props.aadhaarNumber,
+            'password': props.password
+        })
+    }
+
     return (
         <>
             <div className="container bg-white ">
