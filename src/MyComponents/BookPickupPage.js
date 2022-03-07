@@ -37,11 +37,24 @@ export const BookPickupPage = (props) => {
                         <form>
                             <div className="form-group">
                                 <label>Address</label>
-                                <input type="text" className="form-control" placeholder="Enter Address"/>
+                                <input type="text" className="form-control"
+                                       placeholder="Enter Address"/>
                             </div>
                             <div className="form-group">
                                 <label>State</label>
-                                <input type="Number" className="form-control" placeholder="Enter State"/>
+                                <input type="Number" className="form-control"
+                                       placeholder="Enter State"/>
+                            </div>
+                            <div className="dropdown">
+                                <button className="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu"
+                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Select State
+                                </button>
+                                <div className="dropdown-menu" aria-labelledby="dropdownMenu2">
+                                    <button className="dropdown-item" type="button">Action</button>
+                                    <button className="dropdown-item" type="button">Another action</button>
+                                    <button className="dropdown-item" type="button">Something else here</button>
+                                </div>
                             </div>
                             <div className="form-group">
                                 <label htmlFor="exampleInputPassword1">City</label>
@@ -53,11 +66,7 @@ export const BookPickupPage = (props) => {
                                 <input type="Number" className="form-control" id="exampleInputPassword1"
                                        placeholder="Enter PINCODE"/>
                             </div>
-                            <div className="form-group form-check">
-                                <input type="checkbox" className="form-check-input" id="exampleCheck1"/>
-                                <label className="form-check-label" htmlFor="exampleCheck1">Check me out</label>
-                            </div>
-                            <button type="button" className="btn btn-warning">Request Pickup</button>
+                            <button type="button" className="btn btn-warning my-3">Request Pickup</button>
                         </form>
                     </div>
                 </div>
