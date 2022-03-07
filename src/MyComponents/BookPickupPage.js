@@ -36,9 +36,12 @@ export const BookPickupPage = (props) => {
                         <h5>Enter Address</h5>
                         <form>
                             <div className="form-group">
-                                <label htmlFor="exampleInputEmail1">Address</label>
-                                <input type="text" className="form-control" id="exampleInputEmail1"
-                                       aria-describedby="emailHelp" placeholder="Enter Address"/>
+                                <label>Address</label>
+                                <input type="text" className="form-control" placeholder="Enter Address"/>
+                            </div>
+                            <div className="form-group">
+                                <label>State</label>
+                                <input type="Number" className="form-control" placeholder="Enter State"/>
                             </div>
                             <div className="form-group">
                                 <label htmlFor="exampleInputPassword1">City</label>
