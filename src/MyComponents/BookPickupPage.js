@@ -3,6 +3,7 @@ import {useNavigate} from "react-router-dom";
 import React from "react";
 import {HomeTableContent} from "./HomeTableContent";
 import PhoneImage from "../MyPhotos/image-removebg-preview.png"
+import {SplitButton, Dropdown, Button, ButtonGroup} from "react-bootstrap";
 
 export const BookPickupPage = (props) => {
     let navigate = useNavigate();
@@ -44,17 +45,6 @@ export const BookPickupPage = (props) => {
                                 <label>State</label>
                                 <input type="Number" className="form-control"
                                        placeholder="Enter State"/>
-                            </div>
-                            <div className="dropdown">
-                                <button className="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu"
-                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    Select State
-                                </button>
-                                <div className="dropdown-menu" aria-labelledby="dropdownMenu2">
-                                    <button className="dropdown-item" type="button">Action</button>
-                                    <button className="dropdown-item" type="button">Another action</button>
-                                    <button className="dropdown-item" type="button">Something else here</button>
-                                </div>
                             </div>
                             <div className="form-group">
                                 <label htmlFor="exampleInputPassword1">City</label>
