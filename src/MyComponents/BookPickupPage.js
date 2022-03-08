@@ -1,9 +1,7 @@
 import axios from "axios";
 import {useNavigate} from "react-router-dom";
 import React from "react";
-import {HomeTableContent} from "./HomeTableContent";
 import PhoneImage from "../MyPhotos/image-removebg-preview.png"
-import {SplitButton, Dropdown, Button, ButtonGroup} from "react-bootstrap";
 
 export const BookPickupPage = (props) => {
     let navigate = useNavigate();
