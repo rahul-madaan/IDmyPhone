@@ -7,8 +7,7 @@
 7. if localStorage has login data then redirect to home
 8. Email verification OTP
 
-Book pickup, before render, make api call to check if pickup request has already been
-raised or not, if raised then just show a notif.
+error becuase homeTableContent.js and BookPickupPage.js calling db API at same time
 
 
 

@@ -1,9 +1,11 @@
 import axios from "axios";
 import {useNavigate} from "react-router-dom";
-import React from "react";
+import React, {useEffect, useLayoutEffect, useState} from "react";
 import PhoneImage from "../MyPhotos/image-removebg-preview.png"
 
 export const BookPickupPage = (props) => {
+    const [raiseBookPickupStatusError, setRaiseBookPickupStatusFoundError] = useState(false)
+
     let navigate = useNavigate();
     const routeChange = (path) => {
         navigate(path);
@@ -21,6 +23,21 @@ export const BookPickupPage = (props) => {
             'password': props.password
         })
     }
+
+    useEffect(()=>{
+        axios.get("http://localhost:8000/book-pickup-status/" + props.selectedDeviceDetails.IMEI).then(res => {
+            console.log("returned data book pickup status API= " + JSON.stringify(res.data))
+            if(res.data.status_code === 0){
+                console.log("Found in DB, raise ERROR")
+                setRaiseBookPickupStatusFoundError(true)
+            }
+            else if(res.data.status_code === 1){
+                console.log("Not found in DB show fields")
+                setRaiseBookPickupStatusFoundError(false)
+            }
+        })
+    },[props.selectedDeviceDetails.IMEI])
+
 
     return (
         <>
@@ -40,7 +57,11 @@ export const BookPickupPage = (props) => {
                     <div className="col align-items-centre">
                         <p>container 2 start</p>
                         <h3>Book Pickup</h3>
-                        <h5>Enter Address</h5>
+                        {raiseBookPickupStatusError? <div className="alert alert-danger" role="alert">
+                                Already booked
+                            </div>:
+                            <>
+                            <h5>Enter Address</h5>
                         <form>
                             <div className="form-group">
                                 <label>Address</label>
@@ -63,7 +84,7 @@ export const BookPickupPage = (props) => {
                                        placeholder="Enter PINCODE"/>
                             </div>
                             <button type="button" className="btn btn-warning my-3">Request Pickup</button>
-                        </form>
+                        </form></>}
                     </div>
                 </div>
             </div>
