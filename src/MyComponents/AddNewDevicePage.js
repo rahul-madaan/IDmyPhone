@@ -19,7 +19,7 @@ export const AddNewDevicePage = (props) => {
             // console.log("result= " + JSON.stringify(result))
             setGoodDeviceDetails(result.data[0])
 
-            axios.post("http://localhost:8000/get-user-name", {
+            axios.post("http://localhost:5000/get-user-name", {
                 'user_aadhaar_number': sellerAadhaar
             }).then(res => {
                 setGoodDeviceOwnerDetails(res.data[0])
@@ -62,7 +62,7 @@ export const AddNewDevicePage = (props) => {
                     </div>
                     <div className="col align-items-centre">
                         <p>container 2 start</p>
-                        <h3>+ Add New Device</h3>
+                        <h3>+ Buy New Device</h3>
                         <form>
                             <div className="form-group my-2">
                                 <label>Seller's Aadhaar Number</label>

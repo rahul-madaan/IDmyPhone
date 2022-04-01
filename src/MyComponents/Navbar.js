@@ -38,7 +38,7 @@ export const Navbar = () => {
                     </li>
                     <li className="nav-item" role="presentation">
                         <button className="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact"
-                                type="button" role="tab" onClick={addNewDeviceSwitch}>Add New Device
+                                type="button" role="tab" onClick={addNewDeviceSwitch}>Buy New Device
                         </button>
                     </li>
                     <li className="nav-item" role="presentation">
