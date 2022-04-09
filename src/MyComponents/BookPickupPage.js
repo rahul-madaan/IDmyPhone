@@ -9,6 +9,7 @@ export const BookPickupPage = (props) => {
     const [pickupCity, setPickupCity] = useState('')
     const [pickupState, setPickupState] = useState('')
     const [pickupPincode, setPickupPincode] = useState('')
+    const [requestCompleted, setRequestCompleted] = useState(false)
 
     let navigate = useNavigate();
     const routeChange = (path) => {
@@ -29,6 +30,8 @@ export const BookPickupPage = (props) => {
             'city': pickupCity,
             'pincode': pickupPincode,
             'landmark': 'Near Mother Dairy'
+        }).then(()=>{
+            setRequestCompleted(true)
         })
     }
 
@@ -67,7 +70,8 @@ export const BookPickupPage = (props) => {
                         <h3>Book Pickup</h3>
                         {raiseBookPickupStatusError? <div className="alert alert-danger" role="alert">
                                 Already booked
-                            </div>:
+                            </div>: requestCompleted ?
+                            <div className="alert alert-success" role="alert">Pickup Booked Successfully</div>:
                             <>
                             <h5>Enter Address</h5>
                         <form>
