@@ -20,7 +20,7 @@ export const HomePage = (props) => {
     }
 
     const updateUserName = (userAadhaarNumber) => {
-        axios.post("http://localhost:5000/get-user-name", {
+        axios.post("http://localhost:8000/get-user-name", {
             'user_aadhaar_number': userAadhaarNumber
         }).then((result) => {
             console.log(result)

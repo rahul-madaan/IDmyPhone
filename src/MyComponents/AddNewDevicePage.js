@@ -19,7 +19,7 @@ export const AddNewDevicePage = (props) => {
             // console.log("result= " + JSON.stringify(result))
             setGoodDeviceDetails(result.data[0])
 
-            axios.post("http://localhost:5000/get-user-name", {
+            axios.post("http://localhost:8000/get-user-name", {
                 'user_aadhaar_number': sellerAadhaar
             }).then(res => {
                 setGoodDeviceOwnerDetails(res.data[0])
