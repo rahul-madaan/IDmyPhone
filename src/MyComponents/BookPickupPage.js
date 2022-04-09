@@ -5,6 +5,10 @@ import PhoneImage from "../MyPhotos/image-removebg-preview.png"
 
 export const BookPickupPage = (props) => {
     const [raiseBookPickupStatusError, setRaiseBookPickupStatusFoundError] = useState(false)
+    const [pickupAddress, setPickupAddress] = useState('')
+    const [pickupCity, setPickupCity] = useState('')
+    const [pickupState, setPickupState] = useState('')
+    const [pickupPincode, setPickupPincode] = useState('')
 
     let navigate = useNavigate();
     const routeChange = (path) => {
@@ -18,9 +22,13 @@ export const BookPickupPage = (props) => {
 
     const bookPickupClick = (e) => {
         e.preventDefault()
-        axios.post("http://localhost:8000/login", {
-            'aadhaar_number': props.aadhaarNumber,
-            'password': props.password
+        axios.post("http://localhost:8000/book-pickup-entry", {
+            'IMEI': props.selectedDeviceDetails.IMEI,
+            'address': pickupAddress,
+            'state' : pickupState,
+            'city': pickupCity,
+            'pincode': pickupPincode,
+            'landmark': 'Near Mother Dairy'
         })
     }
 
@@ -66,24 +74,32 @@ export const BookPickupPage = (props) => {
                             <div className="form-group">
                                 <label>Address</label>
                                 <input type="text" className="form-control"
-                                       placeholder="Enter Address"/>
+                                       placeholder="Enter Address" value={pickupAddress} onChange={(e) => {
+                                    setPickupAddress(e.target.value)
+                                }}/>
                             </div>
                             <div className="form-group">
                                 <label>State</label>
                                 <input type="text" className="form-control"
-                                       placeholder="Enter State"/>
+                                       placeholder="Enter State" value={pickupState} onChange={(e) => {
+                                    setPickupState(e.target.value)
+                                }}/>
                             </div>
                             <div className="form-group">
                                 <label htmlFor="exampleInputPassword1">City</label>
                                 <input type="text" className="form-control" id="exampleInputPassword1"
-                                       placeholder="Enter City"/>
+                                       placeholder="Enter City" value={pickupCity} onChange={(e) => {
+                                    setPickupCity(e.target.value)
+                                }}/>
                             </div>
                             <div className="form-group">
                                 <label htmlFor="exampleInputPassword1">PINCODE</label>
-                                <input type="Number" className="form-control" id="exampleInputPassword1"
-                                       placeholder="Enter PINCODE"/>
+                                <input type="Number" className="form-control"
+                                       placeholder="Enter PINCODE" value={pickupPincode} onChange={(e) => {
+                                    setPickupPincode(e.target.value)
+                                }}/>
                             </div>
-                            <button type="button" className="btn btn-warning my-3">Request Pickup</button>
+                            <button type="button" className="btn btn-warning my-3" onClick={bookPickupClick}>Request Pickup</button>
                         </form></>}
                     </div>
                 </div>
