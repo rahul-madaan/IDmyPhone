@@ -70,7 +70,7 @@ export const BookPickupPage = (props) => {
                             </div>
                             <div className="form-group">
                                 <label>State</label>
-                                <input type="Number" className="form-control"
+                                <input type="text" className="form-control"
                                        placeholder="Enter State"/>
                             </div>
                             <div className="form-group">
