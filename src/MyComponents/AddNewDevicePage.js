@@ -5,7 +5,7 @@ export const AddNewDevicePage = (props) => {
 
     const [sellerAadhaar, setSellerAadhaar] = useState("")
     const [goodDeviceDetails, setGoodDeviceDetails] = useState({})
-    const [IMEIofGood, setIMEIofGood] = useState("")
+    const [IMEIofGood, setIMEIofGood] = useState("1234567891234567")
     const [goodDeviceOwnerDetails, setGoodDeviceOwnerDetails] = useState({})
     const [warningContent, setWarningContent] = React.useState("")
     const [availabilityOrErrorStatus, setAvailabilityOrErrorStatus] = useState(false)

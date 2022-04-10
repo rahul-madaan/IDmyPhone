@@ -57,7 +57,7 @@ export const TransferRequestsPage = (props) => {
                     <div className="col align-items-centre">
                         <p>container 2 start</p>
                         <div className="d-grid gap-2 d-md-flex justify-content-md-end">
-                            <button type="button" className="btn btn-warning my-2 mx-3">Active Transfer Requests</button>
+                            <button type="button" className="btn btn-warning my-2 mx-3">My Buying Requests</button>
                         </div>
                         <h3>Transfer Requests</h3>
                         <table className="table">

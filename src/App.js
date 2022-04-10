@@ -17,7 +17,7 @@ function App() {
     const [userName, setUserName] = React.useState("Demo") //after login
     const [userAadhaarNumber, setUserAadhaarNumber] = React.useState("111111111111") //after login
     const [userLinkedDevices, setUserLinkedDevices] = React.useState([])
-    const [selectedDeviceDetails, setSelectedDeviceDetails] = useState({})
+    const [selectedDeviceDetails, setSelectedDeviceDetails] = useState({'IMEI':'1234567891234567'})
 
     return (
         <>
