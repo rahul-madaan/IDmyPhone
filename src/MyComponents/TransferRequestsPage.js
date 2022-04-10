@@ -4,6 +4,7 @@ import {TransferTableContent} from "./TransferTableContent";
 
 export const TransferRequestsPage = (props) => {
     const [transferRequestArray, setTransferRequestArray] = useState([{}])
+    const userAadhaarNumber = props.userAadhaarNumber
     const fetchTransferRequests = () => {
         axios.post("http://localhost:8000/fetch-transfer-requests", {
             'user_aadhaar_number': props.userAadhaarNumber
@@ -18,27 +19,6 @@ export const TransferRequestsPage = (props) => {
         fetchTransferRequests()
     }, []);
 
-    const array=[{
-        deviceIMEI:"1234567890",
-        deviceManufacturer:"OnePlus",
-        deviceName:"9R",
-        transferToName:"Rahul",
-        transferToAadhaar:"123412341234"
-    },
-        {
-            deviceIMEI:"345634563456",
-            deviceManufacturer:"Samsung",
-            deviceName:"Galaxy S21",
-            transferToName:"Tushita",
-            transferToAadhaar:"123412341234"
-        },
-        {
-            deviceIMEI:"123412341234",
-            deviceManufacturer:"Motorola",
-            deviceName:"G3",
-            transferToName:"Akshita",
-            transferToAadhaar:"123412341234"
-        }]
 
     return (
         <>
@@ -71,8 +51,8 @@ export const TransferRequestsPage = (props) => {
                             </tr>
                             </thead>
                             <tbody>
-                            {transferRequestArray.map((transferRequestArray,index) => {
-                                return <TransferTableContent transferRequestArray={transferRequestArray} index={index}/>
+                            {transferRequestArray.map((transferRequestArray,index,userAadhaar) => {
+                                return <TransferTableContent transferRequestArray={transferRequestArray} index={index} userAadhaar = {userAadhaarNumber}/>
                             })}
                             </tbody>
                         </table>

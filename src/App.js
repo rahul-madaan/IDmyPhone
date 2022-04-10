@@ -10,6 +10,7 @@ import {TransferRequestsPage} from "./MyComponents/TransferRequestsPage";
 import {AddNewDevicePage} from "./MyComponents/AddNewDevicePage";
 import {BookPickupPage} from "./MyComponents/BookPickupPage";
 import {ReportTheftPage} from "./MyComponents/ReportTheftPage";
+import {CheckOwnerPage} from "./MyComponents/CheckOwnerPage";
 
 function App() {
     const [aadhaarNumber, setAadhaarNumber] = useState("")
@@ -63,6 +64,12 @@ function App() {
                            element={<>
                                <Navbar/>
                                <ReportTheftPage/></>}/>
+                    <Route exact path="/check-owner"
+                           element={<>
+                               <Navbar/>
+                               <CheckOwnerPage userName={userName}
+                                                        userAadhaarNumber={userAadhaarNumber}
+                                                        userLinkedDevices={userLinkedDevices}/></>}/>
                     <Route exact path="/" element={<Navigate to="/login" />} />
                 </Routes>
             </Router>

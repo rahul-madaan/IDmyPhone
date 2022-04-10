@@ -22,6 +22,10 @@ export const Navbar = () => {
         e.preventDefault()
         routeChange('/login')
     }
+    const checkOwnerSwitch = (e) => {
+        e.preventDefault()
+        routeChange('/check-owner')
+    }
     return (
         <>
             <nav>
@@ -43,7 +47,7 @@ export const Navbar = () => {
                     </li>
                     <li className="nav-item" role="presentation">
                         <button className="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact"
-                                type="button" role="tab" >Check Owner
+                                type="button" role="tab" onClick={checkOwnerSwitch}>Check Owner
                         </button>
                     </li>
                 </ul>
