@@ -1,12 +1,24 @@
 import axios from "axios";
-import {useNavigate} from "react-router-dom";
-import React from "react";
+import React, {useEffect, useLayoutEffect, useState} from "react";
 import {TransferTableContent} from "./TransferTableContent";
 
 export const TransferRequestsPage = (props) => {
+    const [transferRequestArray, setTransferRequestArray] = useState([{}])
+    const fetchTransferRequests = () => {
+        axios.post("http://localhost:8000/fetch-transfer-requests", {
+            'user_aadhaar_number': props.userAadhaarNumber
+        }).then((result)=>{
+            console.log("Fetched transfer requests")
+            console.log(result.data)
+            setTransferRequestArray(result.data)
+        })
+    }
+
+    useLayoutEffect(() => {
+        fetchTransferRequests()
+    }, []);
 
     const array=[{
-        sno:1,
         deviceIMEI:"1234567890",
         deviceManufacturer:"OnePlus",
         deviceName:"9R",
@@ -14,7 +26,6 @@ export const TransferRequestsPage = (props) => {
         transferToAadhaar:"123412341234"
     },
         {
-            sno:2,
             deviceIMEI:"345634563456",
             deviceManufacturer:"Samsung",
             deviceName:"Galaxy S21",
@@ -22,7 +33,6 @@ export const TransferRequestsPage = (props) => {
             transferToAadhaar:"123412341234"
         },
         {
-            sno:3,
             deviceIMEI:"123412341234",
             deviceManufacturer:"Motorola",
             deviceName:"G3",
@@ -61,8 +71,8 @@ export const TransferRequestsPage = (props) => {
                             </tr>
                             </thead>
                             <tbody>
-                            {array.map((array) => {
-                                return <TransferTableContent array={array}/>
+                            {transferRequestArray.map((transferRequestArray,index) => {
+                                return <TransferTableContent transferRequestArray={transferRequestArray} index={index}/>
                             })}
                             </tbody>
                         </table>
