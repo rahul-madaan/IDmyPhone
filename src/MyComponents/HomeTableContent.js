@@ -29,7 +29,14 @@ export const HomeTableContent = (props) => {
     const reportTheftClick = (e) => {
         e.preventDefault()
         if(window.confirm("Do you want to report " + e.target.value + " as stolen?")){
+            const dict = {
+                'IMEI': e.target.getAttribute('data-value2')
+            }
+            console.log("IMEI OF DEVICE TO BE REPORTED LOST = "+ e.target.getAttribute('data-value2'))
+            console.log(dict)
+            axios.post("http://localhost:8000/report-theft?IMEI="+e.target.getAttribute('data-value2'))
             console.log("Reported stolen")
+            props.setUpdateLinkedDevices(Math.random())
         }
         else{
             console.log("Not reported stolen")
@@ -45,7 +52,7 @@ export const HomeTableContent = (props) => {
                 <td>{props.linkedDevice.manufacturer}</td>
                 <td>{props.linkedDevice.model_name}</td>
                 <td><button type="button" className="btn btn-outline-success " onClick={bookPickupClick} value={props.linkedDevice.IMEI}>Book Pickup</button></td>
-                <td><button type="button" className="btn btn-outline-danger " onClick={reportTheftClick} value={props.linkedDevice.manufacturer + props.linkedDevice.device_name} >Report Loss</button></td>
+                <td><button type="button" className="btn btn-outline-danger " onClick={reportTheftClick} data-value2={props.linkedDevice.IMEI} value={props.linkedDevice.manufacturer +" " + props.linkedDevice.model_name} >Report Loss</button></td>
             </tr>
         </>
     )

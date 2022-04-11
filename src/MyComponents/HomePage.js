@@ -1,11 +1,12 @@
 import axios from "axios";
 import {useNavigate} from "react-router-dom";
-import React, {useLayoutEffect, useState} from "react";
+import React, {useEffect, useLayoutEffect, useState} from "react";
 import {HomeTableContent} from "./HomeTableContent";
 
 
 
 export const HomePage = (props) => {
+    const [updateLinkedDevices,setUpdateLinkedDevices] = useState("1233")
 
     const fetchLinkedDevices = (userAadhaarNumber,updateUserName) => {
         axios.post("http://localhost:8000/get-linked-devices", {
@@ -32,7 +33,9 @@ export const HomePage = (props) => {
 
     useLayoutEffect(() => {
         fetchLinkedDevices(props.userAadhaarNumber,updateUserName)
-    }, []);
+    }, [updateLinkedDevices]);
+
+
 
 
     return (
@@ -65,7 +68,7 @@ export const HomePage = (props) => {
                             </thead>
                             <tbody>
                             {props.userLinkedDevices.map((linkedDevice,index) => {
-                                return <HomeTableContent linkedDevice={linkedDevice} index={index} setSelectedDeviceDetails={props.setSelectedDeviceDetails}  />
+                                return <HomeTableContent setUpdateLinkedDevices={setUpdateLinkedDevices} linkedDevice={linkedDevice} index={index} setSelectedDeviceDetails={props.setSelectedDeviceDetails}  />
                             })}
                             </tbody>
                         </table>
