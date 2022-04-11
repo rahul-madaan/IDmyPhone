@@ -26,6 +26,16 @@ export const HomeTableContent = (props) => {
         })
     }
 
+    const reportTheftClick = (e) => {
+        e.preventDefault()
+        if(window.confirm("Do you want to report " + e.target.value + " as stolen?")){
+            console.log("Reported stolen")
+        }
+        else{
+            console.log("Not reported stolen")
+        }
+    }
+
     return (
 
         <>
@@ -35,7 +45,7 @@ export const HomeTableContent = (props) => {
                 <td>{props.linkedDevice.manufacturer}</td>
                 <td>{props.linkedDevice.model_name}</td>
                 <td><button type="button" className="btn btn-outline-success " onClick={bookPickupClick} value={props.linkedDevice.IMEI}>Book Pickup</button></td>
-                <td><button type="button" className="btn btn-outline-danger ">Report Loss</button></td>
+                <td><button type="button" className="btn btn-outline-danger " onClick={reportTheftClick} value={props.linkedDevice.manufacturer + props.linkedDevice.device_name} >Report Loss</button></td>
             </tr>
         </>
     )

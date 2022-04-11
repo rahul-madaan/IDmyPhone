@@ -4,6 +4,21 @@ import React, {useCallback, useEffect, useState} from "react";
 export const CheckOwnerPage = (props) => {
     const [deviceIMEI,setDeviceIMEI] = useState('')
 
+    // const fetchDeviceOwner = (deviceIMEI) => {
+    //     axios.post("http://localhost:8000/check-owner", {
+    //         'device_IMEI': deviceIMEI
+    //     }).then((result) => {
+    //         axios.get("http://localhost:8000/fetch-device-details", {
+    //             'device_IMEI': deviceIMEI
+    //         }).then((result)=>{
+    //             axios.get("http://localhost:8000/get-user-name", {
+    //                 'user_aadhaar_neumber':
+    //             })
+    //         })
+    //     })
+    // }
+
+
     return (
         <>
             <div className="container rounded bg-white ">

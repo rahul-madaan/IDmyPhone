@@ -9,7 +9,6 @@ import {HomePage} from "./MyComponents/HomePage";
 import {TransferRequestsPage} from "./MyComponents/TransferRequestsPage";
 import {AddNewDevicePage} from "./MyComponents/AddNewDevicePage";
 import {BookPickupPage} from "./MyComponents/BookPickupPage";
-import {ReportTheftPage} from "./MyComponents/ReportTheftPage";
 import {CheckOwnerPage} from "./MyComponents/CheckOwnerPage";
 
 function App() {
@@ -60,10 +59,6 @@ function App() {
                            element={<>
                                <Navbar/>
                                <BookPickupPage selectedDeviceDetails={selectedDeviceDetails}/></>}/>
-                    <Route exact path="/report-theft"
-                           element={<>
-                               <Navbar/>
-                               <ReportTheftPage/></>}/>
                     <Route exact path="/check-owner"
                            element={<>
                                <Navbar/>
