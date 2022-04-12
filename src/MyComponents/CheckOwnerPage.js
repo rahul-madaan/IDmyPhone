@@ -3,20 +3,20 @@ import React, {useCallback, useEffect, useState} from "react";
 
 export const CheckOwnerPage = (props) => {
     const [deviceIMEI,setDeviceIMEI] = useState('')
+    const [deviceOwnerAadhaar,setDeviceOwnerAadhaar] = useState('')
+    const [deviceOwnerName, setDeviceOwnerName] = useState('')
+    const [deviceName, setDeviceName] = useState('')
+      
 
-    // const fetchDeviceOwner = (deviceIMEI) => {
-    //     axios.post("http://localhost:8000/check-owner", {
-    //         'device_IMEI': deviceIMEI
-    //     }).then((result) => {
-    //         axios.get("http://localhost:8000/fetch-device-details", {
-    //             'device_IMEI': deviceIMEI
-    //         }).then((result)=>{
-    //             axios.get("http://localhost:8000/get-user-name", {
-    //                 'user_aadhaar_neumber':
-    //             })
-    //         })
-    //     })
-    // }
+
+    const fetchDeviceOwner = () => {
+        console.log(deviceIMEI)
+        axios.post("http://localhost:8000/check-owner?IMEI="+deviceIMEI).then((result)=>{
+            setDeviceOwnerAadhaar(result.data[0].owner_aadhaar)
+        }).then(()=>{
+            console.log(deviceOwnerAadhaar)
+        })
+    }
 
 
     return (
@@ -39,11 +39,11 @@ export const CheckOwnerPage = (props) => {
                         <form>
                             <div className="form-group my-2">
                                 <label>Device IMEI</label>
-                                <input type="text" className="form-control" value={deviceIMEI} onChange={(e) => {
+                                <input type="number" className="form-control" value={deviceIMEI} onChange={(e) => {
                                     setDeviceIMEI(e.target.value)
                                 }} placeholder="Enter IMEI of device"/>
                             </div>
-                            <button type="button" className="btn btn-warning my-3">Check Owner
+                            <button type="button" className="btn btn-warning my-3" onClick={fetchDeviceOwner}>Check Owner
                             </button>
                         </form>
                     </div>
