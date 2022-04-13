@@ -8,10 +8,11 @@ export const CheckOwnerPage = (props) => {
     const [deviceName, setDeviceName] = useState('')
     const [skipCount, setSkipCount] = useState(true);
     const [skipCount2, setSkipCount2] = useState(true);
+    const [skipCount3, setSkipCount3] = useState(true);
 
 
 
-    const fetchDeviceOwnerAadhaar = () => {
+    const fetchDeviceDetails = () => {
         axios.post("http://localhost:8000/check-owner?IMEI=" + deviceIMEI)
             .then((result) => {
                 setDeviceOwnerAadhaar('')
@@ -35,11 +36,27 @@ export const CheckOwnerPage = (props) => {
     useLayoutEffect(()=>{
         if (skipCount2 || deviceOwnerName === '') setSkipCount2(false);
         else if (!skipCount2) {
+            axios.get("http://localhost:8000/fetch-device-details/" + deviceIMEI)
+                .then((result) => {
+                    console.log(result)
+                    if (result.data !== []) {
+                        setDeviceName(result.data[0].manufacturer + " " + result.data[0].model_name)
+                    }
+                })
+        }
+    },[deviceOwnerName])
+
+    useLayoutEffect(()=>{
+        if (skipCount3 || deviceOwnerName === '') setSkipCount3(false);
+        else if (!skipCount3) {
             console.log("IMEI = " + deviceIMEI)
             console.log("Owner Aadhaar = " + deviceOwnerAadhaar)
             console.log("Owner Name = " + deviceOwnerName)
+            console.log("Device Name = " + deviceName)
         }
     },[deviceOwnerName])
+
+
 
 
 
@@ -67,7 +84,7 @@ export const CheckOwnerPage = (props) => {
                                     setDeviceIMEI(e.target.value)
                                 }} placeholder="Enter IMEI of device"/>
                             </div>
-                            <button type="button" className="btn btn-warning my-3" onClick={fetchDeviceOwnerAadhaar}>Check Owner
+                            <button type="button" className="btn btn-warning my-3" onClick={fetchDeviceDetails}>Check Owner
                             </button>
                         </form>
                     </div>

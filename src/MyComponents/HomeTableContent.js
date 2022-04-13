@@ -16,9 +16,8 @@ export const HomeTableContent = (props) => {
 
     const fetchDeviceDetails = (e) => {
         console.log(e.target.value)
-        axios.get("http://localhost:8000/fetch-device-details/" + e.target.value, {
-            'user_aadhaar_number': 0
-        }).then((result) => {
+        axios.get("http://localhost:8000/fetch-device-details/" + e.target.value)
+            .then((result) => {
             console.log(result)
             if (result.data !== []) {
                 props.setSelectedDeviceDetails(result.data[0])
