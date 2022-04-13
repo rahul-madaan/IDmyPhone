@@ -9,6 +9,9 @@ export const CheckOwnerPage = (props) => {
     const [skipCount, setSkipCount] = useState(true);
     const [skipCount2, setSkipCount2] = useState(true);
     const [skipCount3, setSkipCount3] = useState(true);
+    const [skipCount4, setSkipCount4] = useState(true);
+    const [deviceLostStatus, setDeviceLostStatus] = useState(false);
+
 
 
 
@@ -40,6 +43,7 @@ export const CheckOwnerPage = (props) => {
                 .then((result) => {
                     console.log(result)
                     if (result.data !== []) {
+                        setDeviceName('')
                         setDeviceName(result.data[0].manufacturer + " " + result.data[0].model_name)
                     }
                 })
@@ -47,14 +51,34 @@ export const CheckOwnerPage = (props) => {
     },[deviceOwnerName])
 
     useLayoutEffect(()=>{
-        if (skipCount3 || deviceOwnerName === '') setSkipCount3(false);
+        if (skipCount3 || deviceName === '') setSkipCount3(false);
         else if (!skipCount3) {
+            axios.get("http://localhost:8000/check-lost-status/" + deviceIMEI)
+                .then((result) => {
+                    console.log(result)
+                    if(result.data[0].status_code === 1){
+                        setDeviceLostStatus('')
+                        setDeviceLostStatus(false)
+                    }
+                    else if(result.data[0].status_code === 0){
+                        setDeviceLostStatus('')
+                        setDeviceLostStatus(true)
+                    }
+                })
+        }
+    },[deviceName])
+
+
+    useLayoutEffect(()=>{
+        if (skipCount4 || deviceLostStatus === '') setSkipCount4(false);
+        else if (!skipCount4) {
             console.log("IMEI = " + deviceIMEI)
             console.log("Owner Aadhaar = " + deviceOwnerAadhaar)
             console.log("Owner Name = " + deviceOwnerName)
             console.log("Device Name = " + deviceName)
+            console.log("Device Lost Status = " + deviceLostStatus)
         }
-    },[deviceOwnerName])
+    },[deviceLostStatus])
 
 
 
