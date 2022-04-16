@@ -6,34 +6,39 @@ import {HomeTableContent} from "./HomeTableContent";
 
 
 export const HomePage = (props) => {
-    const [updateLinkedDevices,setUpdateLinkedDevices] = useState("1233")
+    const [updateLinkedDevices,setUpdateLinkedDevices] = useState(Math.random)
+    const [skipCount, setSkipCount] = useState(true);
+    const [skipCount2, setSkipCount2] = useState(true);
 
-    const fetchLinkedDevices = (userAadhaarNumber,updateUserName) => {
-        axios.post("http://localhost:8000/get-linked-devices", {
-            'user_aadhaar_number': userAadhaarNumber
-        }).then((result) => {
-            console.log(result)
-            if (result.data) {
-                props.setUserLinkedDevices(result.data)
-            }
-            updateUserName(userAadhaarNumber)
-        })
-    }
-
-    const updateUserName = (userAadhaarNumber) => {
-        axios.post("http://localhost:8000/get-user-name", {
-            'user_aadhaar_number': userAadhaarNumber
-        }).then((result) => {
-            console.log(result)
-            if (result.data) {
-                props.setUserName(result.data[0].name)
-            }
-        })
-    }
 
     useLayoutEffect(() => {
-        fetchLinkedDevices(props.userAadhaarNumber,updateUserName)
+        axios.post("http://localhost:8000/get-linked-devices", {
+            'user_aadhaar_number': props.userAadhaarNumber
+        }).then((result) => {
+            console.log(result)
+            if (result.data) {
+                props.setUserLinkedDevices([])
+                props.setUserLinkedDevices(result.data)
+            }
+        })
     }, [updateLinkedDevices]);
+
+    useLayoutEffect(() => {
+
+        if (skipCount2 || props.setUserLinkedDevices === []) setSkipCount2(false);
+        else if (!skipCount2) {
+            axios.post("http://localhost:8000/get-user-name", {
+                'user_aadhaar_number': props.userAadhaarNumber
+            }).then((result) => {
+                console.log(result)
+                if (result.data) {
+                    props.setUserName(result.data[0].name)
+                }
+            })
+        }
+
+
+    }, [props.userLinkedDevices]);
 
 
 
