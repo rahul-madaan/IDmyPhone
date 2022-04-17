@@ -51,7 +51,7 @@ export const HomeTableContent = (props) => {
                 <td>{props.linkedDevice.manufacturer}</td>
                 <td>{props.linkedDevice.model_name}</td>
                 <td><button type="button" className="btn btn-outline-success " onClick={bookPickupClick} value={props.linkedDevice.IMEI}>Book Pickup</button></td>
-                <td><button type="button" className="btn btn-outline-danger " onClick={reportTheftClick} data-value2={props.linkedDevice.IMEI} value={props.linkedDevice.manufacturer +" " + props.linkedDevice.model_name} >Report Loss</button></td>
+                <td><button type="button" className="btn btn-outline-danger " onClick={reportTheftClick} value={props.linkedDevice.IMEI} data-value-device-name={props.linkedDevice.manufacturer +" " + props.linkedDevice.model_name} >Report Loss</button></td>
             </tr>
         </>
     )

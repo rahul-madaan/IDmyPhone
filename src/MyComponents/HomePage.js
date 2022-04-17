@@ -8,7 +8,6 @@ import {HomeTableContent} from "./HomeTableContent";
 export const HomePage = (props) => {
     const [updateLinkedDevices,setUpdateLinkedDevices] = useState(Math.random)
     const [skipCount, setSkipCount] = useState(true);
-    const [skipCount2, setSkipCount2] = useState(true);
 
 
     useLayoutEffect(() => {
@@ -25,8 +24,8 @@ export const HomePage = (props) => {
 
     useLayoutEffect(() => {
 
-        if (skipCount2 || props.setUserLinkedDevices === []) setSkipCount2(false);
-        else if (!skipCount2) {
+        if (skipCount || props.setUserLinkedDevices === []) setSkipCount(false);
+        else if (!skipCount) {
             axios.post("http://localhost:8000/get-user-name", {
                 'user_aadhaar_number': props.userAadhaarNumber
             }).then((result) => {
@@ -36,8 +35,6 @@ export const HomePage = (props) => {
                 }
             })
         }
-
-
     }, [props.userLinkedDevices]);
 
 

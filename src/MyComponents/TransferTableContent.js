@@ -5,9 +5,17 @@ export const TransferTableContent = (props) => {
 
     const approveRequest = (e) => {
         e.preventDefault()
-        //change phone ownership
+        console.log(e.target.value)
+        console.log(e.target.getAttribute('data-value-buyer'))
+        axios.post("http://localhost:8000/update-device-ownership", {
+            "IMEI": e.target.value,
+            "buyer_aadhaar": e.target.getAttribute('data-value-buyer')
+        }).then((result)=>{
+            console.log(result.data[0])
+        })
+        //change phone ownership  ===> DONE
         //remove entry of device from transfer_request table
-        console.log("value of transfer table content" ,JSON.stringify(e.target.value))
+
     }
 
     return (
@@ -18,7 +26,7 @@ export const TransferTableContent = (props) => {
                 <td>{props.transferRequestArray.IMEI}</td>
                 <td>{props.transferRequestArray.device_name}</td>
                 <td>{props.transferRequestArray.buyer_name+": "+props.transferRequestArray.transfer_to_aadhaar}</td>
-                <td><button type="button" className="btn btn-outline-success " onClick={approveRequest} value={props.transferRequestArray.IMEI}>Approve Request</button></td>
+                <td><button type="button" className="btn btn-outline-success " onClick={approveRequest} data-value-buyer={props.transferRequestArray.transfer_to_aadhaar} value={props.transferRequestArray.IMEI}>Approve Request</button></td>
             </tr>
         </>
     )
