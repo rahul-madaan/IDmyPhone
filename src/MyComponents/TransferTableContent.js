@@ -9,7 +9,7 @@ export const TransferTableContent = (props) => {
     const approveRequest = (e) => {
         e.preventDefault()
 
-        if(window.confirm("Do you want to transfer " + e.target.value + " to Aadhaar-"+ e.target.getAttribute('data-value-buyer') +" ?")){
+        if(window.confirm("Do you want to transfer " + e.target.getAttribute('data-value-device-name') + " to "+ e.target.getAttribute('data-value-buyer-name') +" ?")){
             console.log(e.target.value)
             setSelectedDeviceIMEI(e.target.value)
             console.log(e.target.getAttribute('data-value-buyer'))
@@ -50,7 +50,7 @@ export const TransferTableContent = (props) => {
                 <td>{props.transferRequestArray.IMEI}</td>
                 <td>{props.transferRequestArray.device_name}</td>
                 <td>{props.transferRequestArray.buyer_name+": "+props.transferRequestArray.transfer_to_aadhaar}</td>
-                <td><button type="button" className="btn btn-outline-success " onClick={approveRequest} data-value-buyer={props.transferRequestArray.transfer_to_aadhaar} value={props.transferRequestArray.IMEI}>Approve Request</button></td>
+                <td><button type="button" className="btn btn-outline-success " onClick={approveRequest} data-value-buyer={props.transferRequestArray.transfer_to_aadhaar} data-value-device-name={props.transferRequestArray.device_name} data-value-buyer-name={props.transferRequestArray.buyer_name} value={props.transferRequestArray.IMEI}>Approve Request</button></td>
             </tr>
         </>
     )
