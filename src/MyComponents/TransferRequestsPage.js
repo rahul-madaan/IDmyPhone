@@ -5,6 +5,7 @@ import {TransferTableContent} from "./TransferTableContent";
 export const TransferRequestsPage = (props) => {
     const [transferRequestArray, setTransferRequestArray] = useState([{}])
     const userAadhaarNumber = props.userAadhaarNumber
+    const [updateTransferRequestTable, setUpdateTransferRequestTable] = useState(Math.random)
     const fetchTransferRequests = () => {
         axios.post("http://localhost:8000/fetch-transfer-requests", {
             'user_aadhaar_number': props.userAadhaarNumber
@@ -17,7 +18,7 @@ export const TransferRequestsPage = (props) => {
 
     useLayoutEffect(() => {
         fetchTransferRequests()
-    }, []);
+    }, [updateTransferRequestTable]);
 
 
     return (
@@ -52,7 +53,7 @@ export const TransferRequestsPage = (props) => {
                             </thead>
                             <tbody>
                             {transferRequestArray.map((transferRequestArray,index,userAadhaar) => {
-                                return <TransferTableContent transferRequestArray={transferRequestArray} index={index} userAadhaar = {userAadhaarNumber}/>
+                                return <TransferTableContent transferRequestArray={transferRequestArray} index={index} userAadhaar = {userAadhaarNumber} setUpdateTransferRequestTable={setUpdateTransferRequestTable}/>
                             })}
                             </tbody>
                         </table>

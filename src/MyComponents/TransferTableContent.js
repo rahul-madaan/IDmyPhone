@@ -1,22 +1,39 @@
-import React from 'react'
+import React, {useLayoutEffect, useState} from 'react'
 import axios from "axios";
 
 export const TransferTableContent = (props) => {
+    const [currentOwnerAadhaar, setCurrentOwnerAadhaar] = useState('')
+    const [selectedDeviceIMEI, setSelectedDeviceIMEI] = useState('')
+    const [skipCount, setSkipCount] = useState(true);
 
     const approveRequest = (e) => {
         e.preventDefault()
         console.log(e.target.value)
+        setSelectedDeviceIMEI(e.target.value)
         console.log(e.target.getAttribute('data-value-buyer'))
         axios.post("http://localhost:8000/update-device-ownership", {
             "IMEI": e.target.value,
             "buyer_aadhaar": e.target.getAttribute('data-value-buyer')
         }).then((result)=>{
             console.log(result.data[0])
+            setCurrentOwnerAadhaar('')
+            setCurrentOwnerAadhaar(e.target.value)
         })
         //change phone ownership  ===> DONE
         //remove entry of device from transfer_request table
 
     }
+
+    useLayoutEffect(()=>{
+        if (skipCount || currentOwnerAadhaar === '') setSkipCount(false);
+        else if (!skipCount) {
+            axios.post("http://localhost:8000/detete-transfer-request?IMEI=" + selectedDeviceIMEI)
+                .then((result) => {
+                    console.log("Executed and deleted the transfer request")
+                    props.setUpdateTransferRequestTable(Math.random())
+            })
+        }
+    },[currentOwnerAadhaar])
 
     return (
 
