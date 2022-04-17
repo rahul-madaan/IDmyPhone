@@ -26,8 +26,8 @@ export const TransferTableContent = (props) => {
             console.log("Transfer Request Not Approved")
         }
         //change phone ownership  ===> DONE
-        //remove entry of device from transfer_request table //  ===> DONE
-        //add warning on page
+        //remove entry of device from transfer_request table  ===> DONE
+        //add warning on page ===> DONE
 
     }
 
