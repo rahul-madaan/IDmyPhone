@@ -8,19 +8,26 @@ export const TransferTableContent = (props) => {
 
     const approveRequest = (e) => {
         e.preventDefault()
-        console.log(e.target.value)
-        setSelectedDeviceIMEI(e.target.value)
-        console.log(e.target.getAttribute('data-value-buyer'))
-        axios.post("http://localhost:8000/update-device-ownership", {
-            "IMEI": e.target.value,
-            "buyer_aadhaar": e.target.getAttribute('data-value-buyer')
-        }).then((result)=>{
-            console.log(result.data[0])
-            setCurrentOwnerAadhaar('')
-            setCurrentOwnerAadhaar(e.target.value)
-        })
+
+        if(window.confirm("Do you want to transfer " + e.target.value + " to Aadhaar-"+ e.target.getAttribute('data-value-buyer') +" ?")){
+            console.log(e.target.value)
+            setSelectedDeviceIMEI(e.target.value)
+            console.log(e.target.getAttribute('data-value-buyer'))
+            axios.post("http://localhost:8000/update-device-ownership", {
+                "IMEI": e.target.value,
+                "buyer_aadhaar": e.target.getAttribute('data-value-buyer')
+            }).then((result)=>{
+                console.log(result.data[0])
+                setCurrentOwnerAadhaar('')
+                setCurrentOwnerAadhaar(e.target.value)
+            })
+        }
+        else{
+            console.log("Transfer Request Not Approved")
+        }
         //change phone ownership  ===> DONE
-        //remove entry of device from transfer_request table
+        //remove entry of device from transfer_request table //  ===> DONE
+        //add warning on page
 
     }
 
