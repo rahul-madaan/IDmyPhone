@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, {useCallback, useEffect, useState} from "react";
+import React, {useCallback, useEffect, useLayoutEffect, useState} from "react";
 
 export const AddNewDevicePage = (props) => {
 
@@ -9,28 +9,33 @@ export const AddNewDevicePage = (props) => {
     const [goodDeviceOwnerDetails, setGoodDeviceOwnerDetails] = useState({})
     const [warningContent, setWarningContent] = React.useState("")
     const [availabilityOrErrorStatus, setAvailabilityOrErrorStatus] = useState(false)
+    const [skipCount, setSkipCount] = useState(true);
 
-    const clickCheckAvailability = (e,updateWarningContentCallback) => {
+    const clickCheckAvailability = (e) => {
         e.preventDefault()
         axios.post("http://localhost:8000/verify-owner", {
             'seller_aadhaar': sellerAadhaar,
             'IMEI': IMEIofGood
         }).then(result => {
-            // console.log("result= " + JSON.stringify(result))
+            setGoodDeviceDetails({})
             setGoodDeviceDetails(result.data[0])
+        })
+    }
 
+    useLayoutEffect(()=>{
+        if (skipCount || goodDeviceDetails === {}) setSkipCount(false);
+        else if (!skipCount) {
             axios.post("http://localhost:8000/get-user-name", {
                 'user_aadhaar_number': sellerAadhaar
             }).then(res => {
                 setGoodDeviceOwnerDetails(res.data[0])
                 setAvailabilityOrErrorStatus(true)
-
             })
-        })
-    }
+        }
+    },[goodDeviceDetails])
 
     const updateWarningContent =()=>{
-        console.log("updateWarningCOntent: goodDeviceDetails: " + JSON.stringify(goodDeviceDetails))
+        console.log("updateWarningContent: goodDeviceDetails: " + JSON.stringify(goodDeviceDetails))
         if(goodDeviceDetails.status_code===1){
             setWarningContent("No such device exists, please check IMEI")
         }
@@ -78,7 +83,7 @@ export const AddNewDevicePage = (props) => {
                                 }} placeholder="Enter IMEI of device being bought"/>
                             </div>
                             <button type="button" className="btn btn-warning my-3"
-                                    onClick={(e)=>clickCheckAvailability(e, updateWarningContent)}>Check Availability
+                                    onClick={clickCheckAvailability}>Check Availability
                             </button>
                         </form>
                         {/*{sellerAadhaar !=="" && IMEIofGood!==""? <>{setAvailabilityOrErrorStatus(false)}</>:""}*/}
