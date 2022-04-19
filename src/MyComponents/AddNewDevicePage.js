@@ -1,55 +1,142 @@
 import axios from "axios";
 import React, {useCallback, useEffect, useLayoutEffect, useState} from "react";
+import {resetFirstInputPolyfill} from "web-vitals/dist/modules/lib/polyfills/firstInputPolyfill";
 
 export const AddNewDevicePage = (props) => {
 
-    const [sellerAadhaar, setSellerAadhaar] = useState("")
+    const [sellerAadhaar, setSellerAadhaar] = useState('')
     const [goodDeviceDetails, setGoodDeviceDetails] = useState({})
-    const [IMEIofGood, setIMEIofGood] = useState("")
+    const [IMEIofGood, setIMEIofGood] = useState('')
     const [goodDeviceOwnerDetails, setGoodDeviceOwnerDetails] = useState({})
-    const [warningContent, setWarningContent] = React.useState("")
-    const [availabilityOrErrorStatus, setAvailabilityOrErrorStatus] = useState(false)
+    const [warningContent, setWarningContent] = React.useState('')
+    const [warningExists, setWarningExists] = React.useState(false)
     const [skipCount, setSkipCount] = useState(true);
+    const [skipCount2, setSkipCount2] = useState(true);
+    const [skipCount3, setSkipCount3] = useState(true);
+    const [skipCount4, setSkipCount4] = useState(true);
+    const [deviceTransferStatus, setDeviceTransferStatus] = useState(false);
+    const [deviceLostStatus, setDeviceLostStatus] = useState('');
+    const [aadhaarValidity, setAadhaarValidity] = useState('');
+    const [deviceFinalStatus, setDeviceFinalStatus] = useState('');
+    const [requestTransferButtonDisabled, setRequestTransferButtonDisabled] = useState(false);
+
+
 
     const clickCheckAvailability = (e) => {
         e.preventDefault()
-        axios.post("http://localhost:8000/verify-owner", {
-            'seller_aadhaar': sellerAadhaar,
-            'IMEI': IMEIofGood
-        }).then(result => {
-            setGoodDeviceDetails({})
-            setGoodDeviceDetails(result.data[0])
-        })
+        axios.get("http://localhost:8000/check-aadhaar-validity/" + sellerAadhaar)
+            .then((result) => {
+                if(result.data[0].status_code === 1){
+                    setAadhaarValidity('')
+                    setAadhaarValidity(false)
+                    setWarningExists(true)
+                    setWarningContent('Enter valid Aadhaar Number')
+                }
+                else if(result.data[0].status_code === 0){
+                    setAadhaarValidity('')
+                    setAadhaarValidity(true)
+                    setWarningExists(false)
+                    setWarningContent('')
+                }
+            })
     }
 
     useLayoutEffect(()=>{
-        if (skipCount || goodDeviceDetails === {}) setSkipCount(false);
+        if (skipCount) setSkipCount(false);
+        else if(aadhaarValidity === '') {}
         else if (!skipCount) {
-            axios.post("http://localhost:8000/get-user-name", {
+            if(aadhaarValidity) {
+                axios.post("http://localhost:8000/verify-owner", {
+                    'seller_aadhaar': sellerAadhaar,
+                    'IMEI': IMEIofGood
+                }).then(result => {
+                    if(result.data[0].status_code === 1){
+                        setWarningExists(true)
+                        setWarningContent('Enter valid Device IMEI')
+                    }
+                    else if (result.data[0].status_code === 0){
+                        setWarningExists(false)
+                        setWarningContent('')
+                    }
+                    else if (result.data[0].status_code === 2){
+                        setWarningExists(true)
+                        setWarningContent('Device not owned by entered Aadhaar')
+                    }
+                    setGoodDeviceDetails(result.data[0])
+                })
+            }
+        }
+    },[aadhaarValidity])
+
+    useLayoutEffect(()=>{
+        if (skipCount) setSkipCount(false);
+        else if(goodDeviceDetails === {}) {}
+        else if (!skipCount) {
+            console.log("GET USER NAME API CALLED")
+            axios.post("http://localhost:8000/get-user-name/", {
                 'user_aadhaar_number': sellerAadhaar
             }).then(res => {
                 setGoodDeviceOwnerDetails(res.data[0])
-                setAvailabilityOrErrorStatus(true)
             })
         }
     },[goodDeviceDetails])
 
-    const updateWarningContent =()=>{
-        console.log("updateWarningContent: goodDeviceDetails: " + JSON.stringify(goodDeviceDetails))
-        if(goodDeviceDetails.status_code===1){
-            setWarningContent("No such device exists, please check IMEI")
-        }
-        if(goodDeviceDetails.status_code===0){
-            setWarningContent("No warning")
-        }
-    }
 
-    useEffect(() => {
-        updateWarningContent()
-        if(sellerAadhaar ==="" && IMEIofGood===""){
-            setAvailabilityOrErrorStatus(false)
+    useLayoutEffect(()=>{
+        //check theft status
+        if (skipCount2) setSkipCount2(false);
+        else if(goodDeviceOwnerDetails === {}) {}
+        else if (!skipCount2) {
+            axios.post("http://localhost:8000/get-transfer-request-by-IMEI/" + IMEIofGood)
+                .then((result) => {
+                    if(result.data[0].status_code === 1){
+                        setDeviceTransferStatus('')
+                        setDeviceTransferStatus(false)
+                        setDeviceFinalStatus('Available')
+                        setRequestTransferButtonDisabled(false)
+                    }
+                    else if(result.data[0].status_code === 0){
+                        setDeviceTransferStatus('')
+                        setDeviceTransferStatus(true)
+                        setDeviceFinalStatus('Already requested by someone')
+                        setRequestTransferButtonDisabled(true)
+                    }
+                })
         }
-    });
+    },[goodDeviceOwnerDetails])
+
+
+    useLayoutEffect(()=>{
+        //check transfer request status
+        if (skipCount3 || deviceTransferStatus === '') setSkipCount3(false);
+        else if (!skipCount3) {
+            axios.get("http://localhost:8000/check-lost-status/" + IMEIofGood)
+                .then((result) => {
+                    if(result.data[0].status_code === 1){
+                        setDeviceLostStatus(false)
+                    }
+                    else if(result.data[0].status_code === 0){
+                        setDeviceLostStatus(true)
+                        setDeviceFinalStatus('Device Lost')
+                        setRequestTransferButtonDisabled(true)
+
+                    }
+                })
+        }
+    },[deviceTransferStatus])
+
+
+    useLayoutEffect(()=>{
+        if (skipCount4 || goodDeviceOwnerDetails === {}) setSkipCount4(false);
+        else if (!skipCount4) {
+            console.log("DEVICE DETAILS = " + JSON.stringify(goodDeviceDetails))
+            console.log("DEVICE OWNER DETAILS = " + JSON.stringify(goodDeviceOwnerDetails))
+            console.log("DEVICE TRANSFER STATUS = " + deviceTransferStatus)
+            console.log("DEVICE LOST STATUS = " + deviceLostStatus)
+            console.log("AADHAAR VALIDITY = " + aadhaarValidity)
+        }
+    },[goodDeviceOwnerDetails])
+
 
     return (
         <>
@@ -86,20 +173,19 @@ export const AddNewDevicePage = (props) => {
                                     onClick={clickCheckAvailability}>Check Availability
                             </button>
                         </form>
-                        {/*{sellerAadhaar !=="" && IMEIofGood!==""? <>{setAvailabilityOrErrorStatus(false)}</>:""}*/}
-                        {availabilityOrErrorStatus?(goodDeviceDetails.status_code !== 0 ?
+                        {warningExists?
                             <div className="alert alert-danger" role="alert">
                                 {warningContent}
                             </div> :
                             <>
-                                <p className="font-weight-bold">Status: Available</p>
+                                <p className="font-weight-bold">Status: {deviceFinalStatus}</p>
                                 <p className="font-weight-bold">Owner Name: {goodDeviceOwnerDetails.name}</p>
                                 <p className="font-weight-bold">Device: {goodDeviceDetails.manufacturer} {goodDeviceDetails.model_name}</p>
                                 <p className="font-weight-bold">IMEI: {goodDeviceDetails.IMEI}</p>
 
-                                <button type="button" className="btn btn-success my-3">Request Transfer</button>
+                                <button type="button" className="btn btn-success my-3" disabled={requestTransferButtonDisabled}>Request Transfer</button>
                             </>
-                            ):null}
+                            }
                     </div>
                 </div>
             </div>
