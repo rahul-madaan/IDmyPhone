@@ -18,7 +18,7 @@ export const AddNewDevicePage = (props) => {
     const [deviceLostStatus, setDeviceLostStatus] = useState('');
     const [aadhaarValidity, setAadhaarValidity] = useState('');
     const [deviceFinalStatus, setDeviceFinalStatus] = useState('');
-    const [requestTransferButtonDisabled, setRequestTransferButtonDisabled] = useState(false);
+    const [requestTransferButtonDisabled, setRequestTransferButtonDisabled] = useState(true);
 
 
 
@@ -77,6 +77,14 @@ export const AddNewDevicePage = (props) => {
                 'user_aadhaar_number': sellerAadhaar
             }).then(res => {
                 setGoodDeviceOwnerDetails(res.data[0])
+                if(props.userAadhaarNumber === sellerAadhaar){
+                    setWarningExists(true)
+                    setWarningContent('Cannot request to buy own device')
+                }
+                else if(props.userAadhaarNumber !== sellerAadhaar){
+                    setWarningExists(false)
+                    setWarningContent('')
+                }
             })
         }
     },[goodDeviceDetails])
