@@ -8,11 +8,14 @@ export const CheckOwnerPage = (props) => {
     const [deviceOwnerName, setDeviceOwnerName] = useState('')
     const [deviceName, setDeviceName] = useState('')
     const [skipCount, setSkipCount] = useState(true);
+    const [skipCount0, setSkipCount0] = useState(true);
     const [skipCount2, setSkipCount2] = useState(true);
     const [skipCount3, setSkipCount3] = useState(true);
     const [skipCount4, setSkipCount4] = useState(true);
     const [deviceLostStatus, setDeviceLostStatus] = useState(false);
     const [deviceLostStatusWord, setDeviceLostStatusWord] = useState(false);
+    const [warningContent, setWarningContent] = React.useState('')
+    const [warningExists, setWarningExists] = React.useState(false)
 
 
 
@@ -26,6 +29,24 @@ export const CheckOwnerPage = (props) => {
             })
 
     }
+
+    useLayoutEffect(()=>{
+        if (skipCount0 || deviceOwnerAadhaar === '') setSkipCount0(false);
+        else if (!skipCount0) {
+            axios.get("http://localhost:8000/check-IMEI-validity/" + deviceIMEI)
+                .then((result) => {
+                    if(result.data[0].status_code === 1){
+                        setWarningExists(true)
+                        setWarningContent('Enter valid IMEI Number')
+                    }
+                    else if(result.data[0].status_code === 0){
+                        setWarningExists(false)
+                        setWarningContent('')
+                    }
+                })
+        }
+    },[deviceOwnerAadhaar])
+
 
     useLayoutEffect(()=>{
         if (skipCount || deviceOwnerAadhaar === '') setSkipCount(false);
@@ -116,13 +137,18 @@ export const CheckOwnerPage = (props) => {
                             <br/>
                             <br/>
                             <br/>
-                            <>
-                                <p className="font-weight-bold">Status: {deviceLostStatusWord}</p>
-                                <p className="font-weight-bold">Device IMEI: {deviceIMEIconstant}</p>
-                                <p className="font-weight-bold">Device Name: {deviceName}</p>
-                                <p className="font-weight-bold">Owner Aadhaar Number: {deviceOwnerAadhaar}</p>
-                                <p className="font-weight-bold">Owner Name: {deviceOwnerName}</p>
-                            </>
+                            {warningExists ?
+                                <div className="alert alert-danger" role="alert">
+                                    {warningContent}
+                                </div> :
+                                <>
+                                    <p className="font-weight-bold">Status: {deviceLostStatusWord}</p>
+                                    <p className="font-weight-bold">Device IMEI: {deviceIMEIconstant}</p>
+                                    <p className="font-weight-bold">Device Name: {deviceName}</p>
+                                    <p className="font-weight-bold">Owner Aadhaar Number: {deviceOwnerAadhaar}</p>
+                                    <p className="font-weight-bold">Owner Name: {deviceOwnerName}</p>
+                                </>
+                            }
                         </form>
                     </div>
                 </div>
