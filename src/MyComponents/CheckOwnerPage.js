@@ -41,7 +41,6 @@ export const CheckOwnerPage = (props) => {
         else if (!skipCount2) {
             axios.get("http://localhost:8000/fetch-device-details/" + deviceIMEI)
                 .then((result) => {
-                    console.log(result)
                     if (result.data !== []) {
                         setDeviceName('')
                         setDeviceName(result.data[0].manufacturer + " " + result.data[0].model_name)
@@ -55,7 +54,6 @@ export const CheckOwnerPage = (props) => {
         else if (!skipCount3) {
             axios.get("http://localhost:8000/check-lost-status/" + deviceIMEI)
                 .then((result) => {
-                    console.log(result)
                     if(result.data[0].status_code === 1){
                         setDeviceLostStatus('')
                         setDeviceLostStatus(false)
