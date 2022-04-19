@@ -3,6 +3,7 @@ import React, {useCallback, useEffect, useLayoutEffect, useState} from "react";
 
 export const CheckOwnerPage = (props) => {
     const [deviceIMEI,setDeviceIMEI] = useState('')
+    const [deviceIMEIconstant,setDeviceIMEIconstant] = useState('')
     const [deviceOwnerAadhaar,setDeviceOwnerAadhaar] = useState('')
     const [deviceOwnerName, setDeviceOwnerName] = useState('')
     const [deviceName, setDeviceName] = useState('')
@@ -11,6 +12,7 @@ export const CheckOwnerPage = (props) => {
     const [skipCount3, setSkipCount3] = useState(true);
     const [skipCount4, setSkipCount4] = useState(true);
     const [deviceLostStatus, setDeviceLostStatus] = useState(false);
+    const [deviceLostStatusWord, setDeviceLostStatusWord] = useState(false);
 
 
 
@@ -20,6 +22,7 @@ export const CheckOwnerPage = (props) => {
             .then((result) => {
                 setDeviceOwnerAadhaar('')
                 setDeviceOwnerAadhaar(result.data[0].owner_aadhaar)
+                setDeviceIMEIconstant(deviceIMEI)
             })
 
     }
@@ -57,10 +60,12 @@ export const CheckOwnerPage = (props) => {
                     if(result.data[0].status_code === 1){
                         setDeviceLostStatus('')
                         setDeviceLostStatus(false)
+                        setDeviceLostStatusWord("Available with owner")
                     }
                     else if(result.data[0].status_code === 0){
                         setDeviceLostStatus('')
                         setDeviceLostStatus(true)
+                        setDeviceLostStatusWord("LOST")
                     }
                 })
         }
@@ -108,6 +113,16 @@ export const CheckOwnerPage = (props) => {
                             </div>
                             <button type="button" className="btn btn-warning my-3" onClick={fetchDeviceDetails}>Check Owner
                             </button>
+                            <br/>
+                            <br/>
+                            <br/>
+                            <>
+                                <p className="font-weight-bold">Status: {deviceLostStatusWord}</p>
+                                <p className="font-weight-bold">Device IMEI: {deviceIMEIconstant}</p>
+                                <p className="font-weight-bold">Device Name: {deviceName}</p>
+                                <p className="font-weight-bold">Owner Aadhaar Number: {deviceOwnerAadhaar}</p>
+                                <p className="font-weight-bold">Owner Name: {deviceOwnerName}</p>
+                            </>
                         </form>
                     </div>
                 </div>
