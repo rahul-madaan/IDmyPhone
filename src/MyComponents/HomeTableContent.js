@@ -31,9 +31,9 @@ export const HomeTableContent = (props) => {
             const dict = {
                 'IMEI': e.target.getAttribute('data-value2')
             }
-            console.log("IMEI OF DEVICE TO BE REPORTED LOST = "+ e.target.getAttribute('data-value2'))
+            console.log("IMEI OF DEVICE TO BE REPORTED LOST = "+ e.target.value)
             console.log(dict)
-            axios.post("http://localhost:8000/report-theft?IMEI="+e.target.getAttribute('data-value2'))
+            axios.post("http://localhost:8000/report-theft?IMEI="+e.target.value)
             console.log("Reported stolen")
             props.setUpdateLinkedDevices(Math.random())
         }
