@@ -20,15 +20,16 @@ export const AddNewDevicePage = (props) => {
     const [deviceFinalStatus, setDeviceFinalStatus] = useState('');
     const [requestTransferButtonDisabled, setRequestTransferButtonDisabled] = useState(true);
 
+    const clickRequestTransfer = (e) => {
+        e.preventDefault()
 
+    }
 
     const clickCheckAvailability = (e) => {
         e.preventDefault()
         axios.get("http://localhost:8000/check-aadhaar-validity/" + sellerAadhaar)
             .then((result) => {
                 if(result.data[0].status_code === 1){
-                    setAadhaarValidity('')
-                    setAadhaarValidity(false)
                     setWarningExists(true)
                     setWarningContent('Enter valid Aadhaar Number')
                 }
@@ -57,12 +58,12 @@ export const AddNewDevicePage = (props) => {
                     else if (result.data[0].status_code === 0){
                         setWarningExists(false)
                         setWarningContent('')
+                        setGoodDeviceDetails(result.data[0])
                     }
                     else if (result.data[0].status_code === 2){
                         setWarningExists(true)
                         setWarningContent('Device not owned by entered Aadhaar')
                     }
-                    setGoodDeviceDetails(result.data[0])
                 })
             }
         }
@@ -76,7 +77,6 @@ export const AddNewDevicePage = (props) => {
             axios.post("http://localhost:8000/get-user-name/", {
                 'user_aadhaar_number': sellerAadhaar
             }).then(res => {
-                setGoodDeviceOwnerDetails(res.data[0])
                 if(props.userAadhaarNumber === sellerAadhaar){
                     setWarningExists(true)
                     setWarningContent('Cannot request to buy own device')
@@ -84,6 +84,7 @@ export const AddNewDevicePage = (props) => {
                 else if(props.userAadhaarNumber !== sellerAadhaar){
                     setWarningExists(false)
                     setWarningContent('')
+                    setGoodDeviceOwnerDetails(res.data[0])
                 }
             })
         }
