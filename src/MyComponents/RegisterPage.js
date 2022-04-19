@@ -5,7 +5,7 @@ import React from "react";
 export const RegisterPage = () => {
     const [registerAadhaarNumber, setRegisterAadhaarNumber] = React.useState("")
     const [registerPassword, setRegisterPassword] = React.useState("")
-    const [showWarning, setWarning] = React.useState(false)
+    const [showWarning, setShowWarning] = React.useState(false)
     const [warningContent, setWarningContent] = React.useState("")
     let navigate = useNavigate();
     const routeChange = (path) => {
@@ -32,7 +32,7 @@ export const RegisterPage = () => {
                     </div>
                 </div>
                 <div className="mb-3">
-                    <label htmlFor="exampleInputPassword1" className="form-label">Password</label>
+                    <label htmlFor="exampleInputPassword1" className="form-label">New Password</label>
                     <input type="password" value={registerPassword} onChange={(e) => {
                         setRegisterPassword(e.target.value)
                     }} className="form-control" id="exampleInputPassword1"/>
