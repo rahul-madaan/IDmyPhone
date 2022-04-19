@@ -16,7 +16,6 @@ export const HomePage = (props) => {
         }).then((result) => {
             console.log(result)
             if (result.data) {
-                props.setUserLinkedDevices([])
                 props.setUserLinkedDevices(result.data)
             }
         })
