@@ -22,7 +22,15 @@ export const AddNewDevicePage = (props) => {
 
     const clickRequestTransfer = (e) => {
         e.preventDefault()
-
+        axios.post("http://localhost:8000/create-transfer-request", {
+            'buyer_aadhaar': props.userAadhaarNumber,
+            'seller_aadhaar': sellerAadhaar,
+            'IMEI': IMEIofGood,
+            'buyer_name': props.userName,
+            'device_name': goodDeviceDetails.manufacturer + goodDeviceDetails.model_name
+        }).then(result => {
+            console.log(result)
+        })
     }
 
     const clickCheckAvailability = (e) => {
@@ -192,7 +200,7 @@ export const AddNewDevicePage = (props) => {
                                 <p className="font-weight-bold">Device: {goodDeviceDetails.manufacturer} {goodDeviceDetails.model_name}</p>
                                 <p className="font-weight-bold">IMEI: {goodDeviceDetails.IMEI}</p>
 
-                                <button type="button" className="btn btn-success my-3" disabled={requestTransferButtonDisabled}>Request Transfer</button>
+                                <button type="button" className="btn btn-success my-3" disabled={requestTransferButtonDisabled} onClick={clickRequestTransfer}>Request Transfer</button>
                             </>
                             }
                     </div>
