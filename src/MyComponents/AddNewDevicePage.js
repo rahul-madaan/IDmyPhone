@@ -19,6 +19,7 @@ export const AddNewDevicePage = (props) => {
     const [aadhaarValidity, setAadhaarValidity] = useState('');
     const [deviceFinalStatus, setDeviceFinalStatus] = useState('');
     const [requestTransferButtonDisabled, setRequestTransferButtonDisabled] = useState(true);
+    const [showSuccessNotification, setShowSuccessNotification] = useState(false);
 
     const clickRequestTransfer = (e) => {
         e.preventDefault()
@@ -30,6 +31,12 @@ export const AddNewDevicePage = (props) => {
             'device_name': goodDeviceDetails.manufacturer + goodDeviceDetails.model_name
         }).then(result => {
             console.log(result)
+            setRequestTransferButtonDisabled(true)
+            setShowSuccessNotification(true)
+            setDeviceFinalStatus("Requested Successfully by you")
+            setTimeout(() => {
+                setShowSuccessNotification(false)
+            }, 3000)
         })
     }
 
@@ -203,6 +210,12 @@ export const AddNewDevicePage = (props) => {
                                 <button type="button" className="btn btn-success my-3" disabled={requestTransferButtonDisabled} onClick={clickRequestTransfer}>Request Transfer</button>
                             </>
                             }
+                        {showSuccessNotification ?
+                            <div className="alert alert-success" role="alert">
+                                Successfully Requested Device from owner
+                            </div>
+                            :null
+                        }
                     </div>
                 </div>
             </div>
