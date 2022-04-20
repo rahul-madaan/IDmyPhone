@@ -50,7 +50,8 @@ export const TransferTableContent = (props) => {
                 <td>{props.transferRequestArray.IMEI}</td>
                 <td>{props.transferRequestArray.device_name}</td>
                 <td>{props.transferRequestArray.buyer_name+": "+props.transferRequestArray.transfer_to_aadhaar}</td>
-                <td><button type="button" className="btn btn-outline-success " onClick={approveRequest} data-value-buyer={props.transferRequestArray.transfer_to_aadhaar} data-value-device-name={props.transferRequestArray.device_name} data-value-buyer-name={props.transferRequestArray.buyer_name} value={props.transferRequestArray.IMEI}>Approve Request</button></td>
+                <td><button type="button" className="btn btn-outline-success " onClick={approveRequest} data-value-buyer={props.transferRequestArray.transfer_to_aadhaar} data-value-device-name={props.transferRequestArray.device_name} data-value-buyer-name={props.transferRequestArray.buyer_name} value={props.transferRequestArray.IMEI}>Approve</button></td>
+                <td><button type="button" className="btn btn-outline-danger "  value={props.transferRequestArray.IMEI}>Reject</button></td>
             </tr>
         </>
     )
