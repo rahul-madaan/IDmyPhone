@@ -10,6 +10,7 @@ import {TransferRequestsPage} from "./MyComponents/TransferRequestsPage";
 import {AddNewDevicePage} from "./MyComponents/AddNewDevicePage";
 import {BookPickupPage} from "./MyComponents/BookPickupPage";
 import {CheckOwnerPage} from "./MyComponents/CheckOwnerPage";
+import {Footer} from "./MyComponents/Footer";
 
 function App() {
     const [aadhaarNumber, setAadhaarNumber] = useState("")
@@ -30,7 +31,8 @@ function App() {
                                           password={password}
                                           setPassword={setPassword}
                                           userAadhaarNumber={userAadhaarNumber}
-                                          setUserAadhaarNumber={setUserAadhaarNumber}/></>}/>
+                                          setUserAadhaarNumber={setUserAadhaarNumber}/><Footer/></>}/>
+
                     <Route exact path="/home"
                            element={<><Navbar/>
                                <HomePage userName={userName}
