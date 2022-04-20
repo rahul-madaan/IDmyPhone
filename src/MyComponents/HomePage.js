@@ -8,6 +8,7 @@ import {HomeTableContent} from "./HomeTableContent";
 export const HomePage = (props) => {
     const [updateLinkedDevices,setUpdateLinkedDevices] = useState(Math.random)
     const [skipCount, setSkipCount] = useState(true);
+    const [updateByReportTheft, setUpdateByReportTheft] = useState(false)
 
 
     useLayoutEffect(() => {
@@ -25,14 +26,19 @@ export const HomePage = (props) => {
 
         if (skipCount || props.setUserLinkedDevices === []) setSkipCount(false);
         else if (!skipCount) {
-            axios.post("http://localhost:8000/get-user-name", {
-                'user_aadhaar_number': props.userAadhaarNumber
-            }).then((result) => {
-                console.log(result)
-                if (result.data) {
-                    props.setUserName(result.data[0].name)
-                }
-            })
+            if(updateByReportTheft){
+                setUpdateByReportTheft(false)
+            }
+            else {
+                axios.post("http://localhost:8000/get-user-name", {
+                    'user_aadhaar_number': props.userAadhaarNumber
+                }).then((result) => {
+                    console.log(result)
+                    if (result.data) {
+                        props.setUserName(result.data[0].name)
+                    }
+                })
+            }
         }
     }, [props.userLinkedDevices]);
 
@@ -69,7 +75,7 @@ export const HomePage = (props) => {
                             </thead>
                             <tbody>
                             {props.userLinkedDevices.map((linkedDevice,index) => {
-                                return <HomeTableContent setUpdateLinkedDevices={setUpdateLinkedDevices} linkedDevice={linkedDevice} index={index} setSelectedDeviceDetails={props.setSelectedDeviceDetails}  />
+                                return <HomeTableContent setUpdateByReportTheft={setUpdateByReportTheft} updateByReportTheft={[updateByReportTheft]} setUpdateLinkedDevices={setUpdateLinkedDevices}  linkedDevice={linkedDevice} index={index} setSelectedDeviceDetails={props.setSelectedDeviceDetails}  />
                             })}
                             </tbody>
                         </table>

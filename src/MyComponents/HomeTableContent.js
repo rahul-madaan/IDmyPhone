@@ -16,9 +16,10 @@ export const HomeTableContent = (props) => {
 
     const fetchDeviceDetails = (e) => {
         console.log(e.target.value)
+        props.setUpdateByReportTheft(true)
         axios.get("http://localhost:8000/fetch-device-details/" + e.target.value)
             .then((result) => {
-            console.log(result)
+                console.log(result)
             if (result.data !== []) {
                 props.setSelectedDeviceDetails(result.data[0])
             }
