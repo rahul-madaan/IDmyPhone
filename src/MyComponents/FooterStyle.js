@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 
 export const Box = styled.div`
-  padding: 50px 6px;
-  background: black;
+  padding: 5px 6px;
+  background: #085F63;
   position: absolute;
   bottom: 0;
   width: 100%;

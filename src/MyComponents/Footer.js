@@ -11,10 +11,10 @@ import {
 export const Footer = () => {
     return (
         <Box>
-            <h4 style={{ color: '#B3C100',
+            <h4 style={{ color: 'white',
                 textAlign: "center",
-                marginTop: "-50px" }}>
-                Developed for Software Engineering Course
+                marginTop: "-1px" }}>
+                Developed for Software Engineering Course @SNU
             </h4>
             <Container>
 
