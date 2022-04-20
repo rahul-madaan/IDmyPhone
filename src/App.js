@@ -11,6 +11,7 @@ import {AddNewDevicePage} from "./MyComponents/AddNewDevicePage";
 import {BookPickupPage} from "./MyComponents/BookPickupPage";
 import {CheckOwnerPage} from "./MyComponents/CheckOwnerPage";
 import {Footer} from "./MyComponents/Footer";
+import {Heading} from "./MyComponents/Heading";
 
 function App() {
     const [aadhaarNumber, setAadhaarNumber] = useState("")
@@ -19,13 +20,13 @@ function App() {
     const [userAadhaarNumber, setUserAadhaarNumber] = React.useState("111111111111") //after login
     const [userLinkedDevices, setUserLinkedDevices] = React.useState([])
     const [selectedDeviceDetails, setSelectedDeviceDetails] = useState({'IMEI': '1234567891234567'})
-
+    document.body.style = 'background: #f5f5f5;';
     return (
         <>
             <Router>
                 <Routes>
                     <Route exact path="/login"
-                           element={<><LoginRegisterNavbar/>
+                           element={<><Heading/><LoginRegisterNavbar/>
                                <LoginPage aadhaarNumber={aadhaarNumber}
                                           setAadhaarNumber={setAadhaarNumber}
                                           password={password}
