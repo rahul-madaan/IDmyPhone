@@ -18,7 +18,7 @@ function App() {
     const [userName, setUserName] = React.useState("Demo") //after login
     const [userAadhaarNumber, setUserAadhaarNumber] = React.useState("111111111111") //after login
     const [userLinkedDevices, setUserLinkedDevices] = React.useState([])
-    const [selectedDeviceDetails, setSelectedDeviceDetails] = useState({'IMEI':'1234567891234567'})
+    const [selectedDeviceDetails, setSelectedDeviceDetails] = useState({'IMEI': '1234567891234567'})
 
     return (
         <>
@@ -40,34 +40,34 @@ function App() {
                                          setUserName={setUserName}
                                          userLinkedDevices={userLinkedDevices}
                                          setUserLinkedDevices={setUserLinkedDevices}
-                                         setSelectedDeviceDetails={setSelectedDeviceDetails}/></>}/>
+                                         setSelectedDeviceDetails={setSelectedDeviceDetails}/><Footer/></>}/>
                     <Route exact path="/register"
                            element={<>
                                <LoginRegisterNavbar/>
-                               <RegisterPage/></>}/>
+                               <RegisterPage/><Footer/></>}/>
                     <Route exact path="/transfer-requests"
                            element={<>
                                <Navbar/>
                                <TransferRequestsPage userName={userName}
                                                      userAadhaarNumber={userAadhaarNumber}
-                                                     userLinkedDevices={userLinkedDevices}/></>}/>
+                                                     userLinkedDevices={userLinkedDevices}/><Footer/></>}/>
                     <Route exact path="/add-new-device"
                            element={<>
                                <Navbar/>
                                <AddNewDevicePage userName={userName}
                                                  userAadhaarNumber={userAadhaarNumber}
-                                                 userLinkedDevices={userLinkedDevices}/></>}/>
+                                                 userLinkedDevices={userLinkedDevices}/><Footer/></>}/>
                     <Route exact path="/book-pickup"
                            element={<>
                                <Navbar/>
-                               <BookPickupPage selectedDeviceDetails={selectedDeviceDetails}/></>}/>
+                               <BookPickupPage selectedDeviceDetails={selectedDeviceDetails}/><Footer/></>}/>
                     <Route exact path="/check-owner"
                            element={<>
                                <Navbar/>
                                <CheckOwnerPage userName={userName}
-                                                        userAadhaarNumber={userAadhaarNumber}
-                                                        userLinkedDevices={userLinkedDevices}/></>}/>
-                    <Route exact path="/" element={<Navigate to="/login" />} />
+                                               userAadhaarNumber={userAadhaarNumber}
+                                               userLinkedDevices={userLinkedDevices}/><Footer/></>}/>
+                    <Route exact path="/" element={<Navigate to="/login"/>}/>
                 </Routes>
             </Router>
         </>
