@@ -37,6 +37,12 @@ export const HomeTableContent = (props) => {
             axios.post("http://localhost:8000/report-theft?IMEI="+e.target.value)
             console.log("Reported stolen")
             props.setUpdateLinkedDevices(Math.random())
+            props.setNotificationContent("Phone reported as stolen/lost successfully!")
+            props.setNotificationExists(true)
+            setTimeout(() => {
+                props.setNotificationContent('')
+                props.setNotificationExists(false)
+            }, 3000)
         }
         else{
             console.log("Not reported stolen")

@@ -9,6 +9,8 @@ export const HomePage = (props) => {
     const [updateLinkedDevices,setUpdateLinkedDevices] = useState(Math.random)
     const [skipCount, setSkipCount] = useState(true);
     const [updateByReportTheft, setUpdateByReportTheft] = useState(false)
+    const [notificationExists, setNotificationExists] = useState(false)
+    const [notificationContent, setNotificationContent] = useState('')
 
 
     useLayoutEffect(() => {
@@ -75,10 +77,16 @@ export const HomePage = (props) => {
                             </thead>
                             <tbody>
                             {props.userLinkedDevices.map((linkedDevice,index) => {
-                                return <HomeTableContent setUpdateByReportTheft={setUpdateByReportTheft} updateByReportTheft={[updateByReportTheft]} setUpdateLinkedDevices={setUpdateLinkedDevices}  linkedDevice={linkedDevice} index={index} setSelectedDeviceDetails={props.setSelectedDeviceDetails}  />
+                                return <HomeTableContent setNotificationContent={setNotificationContent} setNotificationExists={setNotificationExists} setUpdateByReportTheft={setUpdateByReportTheft} updateByReportTheft={[updateByReportTheft]} setUpdateLinkedDevices={setUpdateLinkedDevices}  linkedDevice={linkedDevice} index={index} setSelectedDeviceDetails={props.setSelectedDeviceDetails}  />
                             })}
                             </tbody>
                         </table>
+                        {notificationExists ?
+                            <div className="alert alert-success" role="alert">
+                                {notificationContent}
+                            </div>
+                            :null
+                        }
                     </div>
                 </div>
             </div>
