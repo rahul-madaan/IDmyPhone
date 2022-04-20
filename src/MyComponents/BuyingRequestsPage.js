@@ -2,6 +2,7 @@ import axios from "axios";
 import {useNavigate} from "react-router-dom";
 import React, {useEffect, useLayoutEffect, useState} from "react";
 import {TransferTableContent} from "./TransferTableContent";
+import {BuyingTableContent} from "./BuyingTableContent";
 
 export const BuyingRequestsPage = (props) => {
     const [transferRequestArray, setTransferRequestArray] = useState([{}])
@@ -65,7 +66,7 @@ export const BuyingRequestsPage = (props) => {
                             </thead>
                             <tbody>
                             {transferRequestArray.map((transferRequestArray,index,userAadhaar) => {
-                                return <TransferTableContent transferRequestArray={transferRequestArray} index={index} userAadhaar = {userAadhaarNumber} setUpdateTransferRequestTable={setUpdateTransferRequestTable}/>
+                                return <BuyingTableContent transferRequestArray={transferRequestArray} index={index} userAadhaar = {userAadhaarNumber} setUpdateTransferRequestTable={setUpdateTransferRequestTable}/>
                             })}
                             </tbody>
                         </table>

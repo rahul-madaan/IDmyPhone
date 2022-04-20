@@ -9,7 +9,7 @@ export const BuyingTableContent = (props) => {
 
     const rejectRequest = (e) => {
         e.preventDefault()
-        if(window.confirm("Do you want to reject the transfer " + e.target.getAttribute('data-value-device-name') + " to "+ e.target.getAttribute('data-value-buyer-name') +" ?")){
+        if(window.confirm("Do you want to withdraw the transfer request of " + e.target.getAttribute('data-value-device-name') + " to you?")){
             axios.post("http://localhost:8000/delete-transfer-request?IMEI=" + e.target.value)
                 .then((result) => {
                     console.log("Deleted the transfer request")
@@ -29,7 +29,7 @@ export const BuyingTableContent = (props) => {
                 <td>{props.transferRequestArray.IMEI}</td>
                 <td>{props.transferRequestArray.device_name}</td>
                 <td>{props.transferRequestArray.buyer_name+": "+props.transferRequestArray.transfer_to_aadhaar}</td>
-                <td><button type="button" className="btn btn-outline-danger "  onClick={rejectRequest} data-value-buyer={props.transferRequestArray.transfer_to_aadhaar} data-value-device-name={props.transferRequestArray.device_name} data-value-buyer-name={props.transferRequestArray.buyer_name} value={props.transferRequestArray.IMEI}>Reject</button></td>
+                <td><button type="button" className="btn btn-outline-danger "  onClick={rejectRequest} data-value-buyer={props.transferRequestArray.transfer_to_aadhaar} data-value-device-name={props.transferRequestArray.device_name} data-value-buyer-name={props.transferRequestArray.buyer_name} value={props.transferRequestArray.IMEI}>Withdraw Request</button></td>
             </tr>
         </>
     )
