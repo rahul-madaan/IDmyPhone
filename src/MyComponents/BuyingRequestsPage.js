@@ -1,32 +1,31 @@
 import axios from "axios";
+import {useNavigate} from "react-router-dom";
 import React, {useEffect, useLayoutEffect, useState} from "react";
 import {TransferTableContent} from "./TransferTableContent";
-import {useNavigate} from "react-router-dom";
 
-export const TransferRequestsPage = (props) => {
+export const BuyingRequestsPage = (props) => {
     const [transferRequestArray, setTransferRequestArray] = useState([{}])
     const userAadhaarNumber = props.userAadhaarNumber
     const [updateTransferRequestTable, setUpdateTransferRequestTable] = useState(Math.random)
-
-
-    const fetchTransferRequests = () => {
-        axios.post("http://localhost:8000/fetch-transfer-requests", {
-            'user_aadhaar_number': props.userAadhaarNumber
-        }).then((result)=>{
-            console.log("Fetched transfer requests")
-            console.log(result.data)
-            setTransferRequestArray(result.data)
-        })
-    }
 
     let navigate = useNavigate();
     const routeChange = (path) => {
         navigate(path);
     }
 
-    const myBuyingRequestButtonClick = (e) => {
+    const transferRequestButtonClick = (e) => {
         e.preventDefault()
-        routeChange('/buying-requests')
+        routeChange('/transfer-requests')
+    }
+
+    const fetchTransferRequests = () => {
+        axios.post("http://localhost:8000/fetch-my-transfer-requests", {
+            'user_aadhaar_number': props.userAadhaarNumber
+        }).then((result)=>{
+            console.log("Fetched transfer requests")
+            console.log(result.data)
+            setTransferRequestArray(result.data)
+        })
     }
 
     useLayoutEffect(() => {
@@ -51,9 +50,9 @@ export const TransferRequestsPage = (props) => {
                     <div className="col align-items-centre">
                         <p>container 2 start</p>
                         <div className="d-grid gap-2 d-md-flex justify-content-md-end">
-                            <button type="button" className="btn btn-warning my-2 mx-3"  onClick={myBuyingRequestButtonClick}>My Buying Requests</button>
+                            <button type="button" className="btn btn-warning my-2 mx-3" onClick={transferRequestButtonClick}>Transfer Requests</button>
                         </div>
-                        <h3>Transfer Requests</h3>
+                        <h3>My Buying Requests</h3>
                         <table className="table">
                             <thead>
                             <tr>
@@ -61,8 +60,7 @@ export const TransferRequestsPage = (props) => {
                                 <th scope="col">Device IMEI</th>
                                 <th scope="col">Model Name</th>
                                 <th scope="col">Transfer To</th>
-                                <th scope="col">Approve Transfer</th>
-                                <th scope="col">Reject Transfer</th>
+                                <th scope="col">Withdaw Transfer</th>
                             </tr>
                             </thead>
                             <tbody>
