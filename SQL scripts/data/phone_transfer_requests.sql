@@ -1,0 +1,1 @@
+INSERT INTO phone.transfer_requests (transfer_to_aadhaar, transfer_from_aadhaar, IMEI, buyer_name, device_name) VALUES ('123123123123', '123412341234', '1234567891234567', 'Tushita Madan', 'Xiaomi Note 7S');

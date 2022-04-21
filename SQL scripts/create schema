@@ -1,0 +1,82 @@
+create table phone.user_details
+(
+    aadhaar_number varchar(50) not null
+        primary key,
+    name           varchar(50) not null,
+    email          varchar(50) not null,
+    phone_number   varchar(50) not null,
+    constraint user_details_aadhaar_number_uindex
+        unique (aadhaar_number),
+    constraint user_details_email_uindex
+        unique (email)
+);
+
+create table phone.phone_ownership
+(
+    owner_aadhaar varchar(50) not null,
+    IMEI          varchar(50) not null
+        primary key,
+    manufacturer  varchar(50) not null,
+    model_name    varchar(50) not null,
+    constraint phone_ownership_IMEI_uindex
+        unique (IMEI),
+    constraint phone_ownership_user_details_aadhaar_number_fk
+        foreign key (owner_aadhaar) references phone.user_details (aadhaar_number)
+);
+
+create table phone.lost_record
+(
+    IMEI varchar(50) not null
+        primary key,
+    constraint lost_record_IMEI_uindex
+        unique (IMEI),
+    constraint lost_record_phone_ownership_IMEI_fk
+        foreign key (IMEI) references phone.phone_ownership (IMEI)
+);
+
+create table phone.pickup_requests
+(
+    IMEI     varchar(50) not null,
+    address  varchar(50) not null,
+    state    varchar(20) not null,
+    city     varchar(25) not null,
+    pincode  int         not null,
+    landmark varchar(50) null,
+    constraint pickup_requests_IMEI_uindex
+        unique (IMEI),
+    constraint pickup_requests_phone_ownership_IMEI_fk
+        foreign key (IMEI) references phone.phone_ownership (IMEI)
+);
+
+create index pickup_requests_city_index
+    on phone.pickup_requests (city);
+
+create index pickup_requests_state_index
+    on phone.pickup_requests (state);
+
+create table phone.transfer_requests
+(
+    transfer_to_aadhaar   varchar(50) not null,
+    transfer_from_aadhaar varchar(50) not null,
+    IMEI                  varchar(50) not null,
+    buyer_name            varchar(50) not null,
+    device_name           varchar(50) not null,
+    constraint transfer_requests_phone_ownership_IMEI_fk
+        foreign key (IMEI) references phone.phone_ownership (IMEI),
+    constraint transfer_requests_user_details_aadhaar_number_fk
+        foreign key (transfer_to_aadhaar) references phone.user_details (aadhaar_number),
+    constraint transfer_requests_user_details_aadhaar_number_fk_2
+        foreign key (transfer_from_aadhaar) references phone.user_details (aadhaar_number)
+);
+
+create table phone.user_login
+(
+    aadhaar_number varchar(50) not null
+        primary key,
+    password       varchar(50) not null,
+    constraint user_login_aadhaarNumber_uindex
+        unique (aadhaar_number),
+    constraint user_login_user_details_aadhaar_number_fk
+        foreign key (aadhaar_number) references phone.user_details (aadhaar_number)
+);
+
