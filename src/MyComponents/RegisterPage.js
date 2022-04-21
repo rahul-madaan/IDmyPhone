@@ -31,6 +31,18 @@ export const RegisterPage = (props) => {
             setShowWarning(true)
             setWarningContent("Email cannot be blank!")
         }
+        else if(registerEmail.includes('.') === false || registerEmail.includes('@') === false){
+            setShowWarning(true)
+            setWarningContent("Email must have . and @")
+        }
+        else if(registerPhoneNumber.length !== 10){
+            setShowWarning(true)
+            setWarningContent("Enter a Valid 10 Digit Phone Number!")
+        }
+        else if(registerPassword.length < 4){
+            setShowWarning(true)
+            setWarningContent("Password cannot be less than 4 characters!")
+        }
         axios.post("http://localhost:8000/register_user", {
             'aadhaar_number': registerAadhaarNumber,
             'password': registerPassword,
