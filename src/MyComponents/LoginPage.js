@@ -1,10 +1,11 @@
 import axios from "axios";
 import {useNavigate} from "react-router-dom";
-import React from "react";
+import React, {useEffect} from "react";
 
 export const LoginPage = (props) => {
     const [showWarning, setWarning] = React.useState(false)
     const [warningContent, setWarningContent] = React.useState("")
+    const [tempAadhaar, setTempAadhaar] = React.useState('')
     let navigate = useNavigate();
     const routeChange = (path) => {
         navigate(path);
@@ -30,6 +31,18 @@ export const LoginPage = (props) => {
             }
         })
     }
+
+    useEffect(()=>{
+        if(props.aadhaarNumber==='0'){
+            props.setAadhaarNumber('')
+        }
+        if(props.aadhaarNumber.length===12){
+            setTempAadhaar(props.aadhaarNumber)
+        }
+        if(props.aadhaarNumber.length>12){
+            props.setAadhaarNumber(tempAadhaar)
+        }
+    },[props.aadhaarNumber])
 
     return (
         <div className="mx-5">
