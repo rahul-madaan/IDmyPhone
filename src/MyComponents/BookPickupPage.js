@@ -10,6 +10,7 @@ export const BookPickupPage = (props) => {
     const [pickupState, setPickupState] = useState('')
     const [pickupPincode, setPickupPincode] = useState('')
     const [requestCompleted, setRequestCompleted] = useState(false)
+    const [tempPIN, setTempPIN] = useState('')
 
     let navigate = useNavigate();
     const routeChange = (path) => {
@@ -34,6 +35,18 @@ export const BookPickupPage = (props) => {
             setRequestCompleted(true)
         })
     }
+
+    useEffect(()=>{
+        if(pickupPincode==='0'){
+            setPickupPincode('')
+        }
+        if(pickupPincode.length===6){
+            setTempPIN(pickupPincode)
+        }
+        if(pickupPincode.length>6){
+            setPickupPincode(tempPIN)
+        }
+    },[pickupPincode])
 
     useEffect(()=>{
         axios.get("http://localhost:8000/book-pickup-status/" + props.selectedDeviceDetails.IMEI).then(res => {
