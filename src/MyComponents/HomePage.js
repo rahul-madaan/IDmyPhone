@@ -62,7 +62,6 @@ export const HomePage = (props) => {
                         </div>
                     </div>
                     <div className="col align-items-centre">
-                        <p>container 2 start</p>
                         <h3>Linked Devices</h3>
                         <table className="table">
                             <thead>

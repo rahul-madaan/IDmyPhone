@@ -127,7 +127,6 @@ export const CheckOwnerPage = (props) => {
                         </div>
                     </div>
                     <div className="col align-items-centre">
-                        <p>container 2 start</p>
                         <h3>Check Owner</h3>
                         <form>
                             <div className="form-group my-2">

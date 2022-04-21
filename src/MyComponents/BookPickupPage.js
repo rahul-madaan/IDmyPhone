@@ -78,7 +78,6 @@ export const BookPickupPage = (props) => {
                         </div>
                     </div>
                     <div className="col align-items-centre">
-                        <p>container 2 start</p>
                         <h3>Book Pickup</h3>
                         {raiseBookPickupStatusError? <div className="alert alert-danger" role="alert">
                                 Already booked

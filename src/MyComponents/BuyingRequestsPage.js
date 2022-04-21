@@ -48,7 +48,6 @@ export const BuyingRequestsPage = (props) => {
                         </div>
                     </div>
                     <div className="col align-items-centre">
-                        <p>container 2 start</p>
                         <div className="d-grid gap-2 d-md-flex justify-content-md-end">
                             <button type="button" className="btn btn-warning my-2 mx-3" onClick={transferRequestButtonClick}>Transfer Requests</button>
                         </div>

@@ -176,7 +176,6 @@ export const AddNewDevicePage = (props) => {
                         </div>
                     </div>
                     <div className="col align-items-centre">
-                        <p>container 2 start</p>
                         <h3>+ Buy New Device</h3>
                         <form>
                             <div className="form-group my-2">
