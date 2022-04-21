@@ -1,3 +1,5 @@
+create database phone;
+
 create table phone.user_details
 (
     aadhaar_number varchar(50) not null
