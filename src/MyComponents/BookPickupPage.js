@@ -68,7 +68,6 @@ export const BookPickupPage = (props) => {
             <div className="container bg-white ">
                 <div className="row">
                     <div className="col-md-3">
-                        <p>container 1 start</p>
                         <button type="button" className="btn btn-outline-dark" onClick={homeClick}>Back to Home</button>
                         <div className="d-flex flex-column  "><img
                             className=" mt-5 mt-5" width="250px"

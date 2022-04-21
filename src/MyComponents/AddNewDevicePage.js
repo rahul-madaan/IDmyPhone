@@ -167,7 +167,6 @@ export const AddNewDevicePage = (props) => {
             <div className="container rounded bg-white ">
                 <div className="row">
                     <div className="col-md-3">
-                        <p>container 1 start</p>
                         <div className="d-flex flex-column  "><img
                             className="rounded-circle mt-5" width="250px"
                             src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg"/>
