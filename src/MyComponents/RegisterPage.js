@@ -1,6 +1,6 @@
 import axios from "axios";
 import {useNavigate} from "react-router-dom";
-import React from "react";
+import React, {useEffect} from "react";
 
 export const RegisterPage = (props) => {
     const [registerAadhaarNumber, setRegisterAadhaarNumber] = React.useState("")
@@ -10,6 +10,8 @@ export const RegisterPage = (props) => {
     const [registerPhoneNumber, setRegisterPhoneNumber] = React.useState("")
     const [showWarning, setShowWarning] = React.useState(false)
     const [warningContent, setWarningContent] = React.useState("")
+    const [tempAadhaar, setTempAadhaar] = React.useState("")
+    const [tempPhoneNumber, setTempPhoneNumber] = React.useState("")
     let navigate = useNavigate();
     const routeChange = (path) => {
         navigate(path);
@@ -32,6 +34,30 @@ export const RegisterPage = (props) => {
             }, 4000)
         })
     }
+
+    useEffect(()=>{
+        if(registerAadhaarNumber==='0'){
+            setRegisterAadhaarNumber('')
+        }
+        if(registerAadhaarNumber.length===12){
+            setTempAadhaar(registerAadhaarNumber)
+        }
+        if(registerAadhaarNumber.length>12){
+            setRegisterAadhaarNumber(tempAadhaar)
+        }
+    },[registerAadhaarNumber])
+
+    useEffect(()=>{
+        if(registerPhoneNumber==='0'){
+            setRegisterPhoneNumber('')
+        }
+        if(registerPhoneNumber.length===10){
+            setTempPhoneNumber(registerPhoneNumber)
+        }
+        if(registerPhoneNumber.length>10){
+            setRegisterPhoneNumber(tempPhoneNumber)
+        }
+    },[registerPhoneNumber])
 
     return (
         <div className="mx-5">
