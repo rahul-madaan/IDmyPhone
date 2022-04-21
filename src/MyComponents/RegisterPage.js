@@ -19,6 +19,18 @@ export const RegisterPage = (props) => {
 
     const registerSubmit = (e) => {
         e.preventDefault()
+        if(registerAadhaarNumber.length !== 12){
+            setShowWarning(true)
+            setWarningContent("Enter 12 Digit Aadhaar Number!")
+        }
+        else if(registerUserName === ''){
+            setShowWarning(true)
+            setWarningContent("Name cannot be blank!")
+        }
+        else if(registerEmail === ''){
+            setShowWarning(true)
+            setWarningContent("Email cannot be blank!")
+        }
         axios.post("http://localhost:8000/register_user", {
             'aadhaar_number': registerAadhaarNumber,
             'password': registerPassword,
