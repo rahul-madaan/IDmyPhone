@@ -43,20 +43,22 @@ export const RegisterPage = (props) => {
             setShowWarning(true)
             setWarningContent("Password cannot be less than 4 characters!")
         }
-        axios.post("http://localhost:8000/register_user", {
-            'aadhaar_number': registerAadhaarNumber,
-            'password': registerPassword,
-            'user_name': registerUserName,
-            'email': registerEmail,
-            'phone_number': registerPhoneNumber
-        }).then((result) => {
-            console.log(result)
-            routeChange("/login")
-            props.setRegisterSuccessNotif(true)
-            setTimeout(() => {
-                props.setRegisterSuccessNotif(false)
-            }, 4000)
-        })
+        else {
+            axios.post("http://localhost:8000/register_user", {
+                'aadhaar_number': registerAadhaarNumber,
+                'password': registerPassword,
+                'user_name': registerUserName,
+                'email': registerEmail,
+                'phone_number': registerPhoneNumber
+            }).then((result) => {
+                console.log(result)
+                routeChange("/login")
+                props.setRegisterSuccessNotif(true)
+                setTimeout(() => {
+                    props.setRegisterSuccessNotif(false)
+                }, 4000)
+            })
+        }
     }
 
     useEffect(()=>{
