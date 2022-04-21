@@ -67,6 +67,10 @@ export const LoginPage = (props) => {
                 <div className="alert alert-danger" role="alert">
                     {warningContent}
                 </div> : null}
+            {props.registerSuccessNotif ?
+                <div className="alert alert-success" role="alert">
+                    Successfully Registered New User!
+                </div> : null}
         </div>
     )
 }

@@ -2,7 +2,7 @@ import axios from "axios";
 import {useNavigate} from "react-router-dom";
 import React from "react";
 
-export const RegisterPage = () => {
+export const RegisterPage = (props) => {
     const [registerAadhaarNumber, setRegisterAadhaarNumber] = React.useState("")
     const [registerPassword, setRegisterPassword] = React.useState("")
     const [registerUserName, setRegisterUserName] = React.useState("")
@@ -17,7 +17,7 @@ export const RegisterPage = () => {
 
     const registerSubmit = (e) => {
         e.preventDefault()
-        axios.put("http://localhost:8000/register", {
+        axios.post("http://localhost:8000/register_user", {
             'aadhaar_number': registerAadhaarNumber,
             'password': registerPassword,
             'user_name': registerUserName,
@@ -25,6 +25,11 @@ export const RegisterPage = () => {
             'phone_number': registerPhoneNumber
         }).then((result) => {
             console.log(result)
+            routeChange("/login")
+            props.setRegisterSuccessNotif(true)
+            setTimeout(() => {
+                props.setRegisterSuccessNotif(false)
+            }, 4000)
         })
     }
 
@@ -43,19 +48,19 @@ export const RegisterPage = () => {
                     <label className="form-label">Full Name</label>
                     <input type="text" placeholder="Enter your full name"  value={registerUserName} onChange={(e) => {
                         setRegisterUserName(e.target.value)
-                    }} className="form-control" id="exampleInputPassword1"/>
+                    }} className="form-control" />
                 </div>
                 <div className="mb-3">
                     <label className="form-label">Email ID</label>
                     <input type="text" placeholder="Enter email ID"  value={registerEmail} onChange={(e) => {
                         setRegisterEmail(e.target.value)
-                    }} className="form-control" id="exampleInputPassword1"/>
+                    }} className="form-control" />
                 </div>
                 <div className="mb-3">
                     <label className="form-label">Phone Number</label>
                     <input type="number" placeholder="Enter 10 Digit Phone Number"  value={registerPhoneNumber} onChange={(e) => {
                         setRegisterPhoneNumber(e.target.value)
-                    }} className="form-control" id="exampleInputPassword1"/>
+                    }} className="form-control" />
                 </div>
                 <div className="mb-3">
                     <label className="form-label">New Password</label>

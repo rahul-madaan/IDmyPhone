@@ -21,6 +21,7 @@ function App() {
     const [userAadhaarNumber, setUserAadhaarNumber] = React.useState("111111111111") //after login
     const [userLinkedDevices, setUserLinkedDevices] = React.useState([])
     const [selectedDeviceDetails, setSelectedDeviceDetails] = useState({'IMEI': '1234567891234567'})
+    const [registerSuccessNotif, setRegisterSuccessNotif] = useState(false)
     return (
         <>
             <Router>
@@ -32,7 +33,8 @@ function App() {
                                           password={password}
                                           setPassword={setPassword}
                                           userAadhaarNumber={userAadhaarNumber}
-                                          setUserAadhaarNumber={setUserAadhaarNumber}/><Footer/></>}/>
+                                          setUserAadhaarNumber={setUserAadhaarNumber}
+                                          registerSuccessNotif={registerSuccessNotif}/><Footer/></>}/>
 
                     <Route exact path="/home"
                            element={<><Heading/><Navbar/>
@@ -45,7 +47,7 @@ function App() {
                     <Route exact path="/register"
                            element={<><Heading/>
                                <LoginRegisterNavbar/>
-                               <RegisterPage/><Footer/></>}/>
+                               <RegisterPage setRegisterSuccessNotif={setRegisterSuccessNotif}/><Footer/></>}/>
                     <Route exact path="/transfer-requests"
                            element={<><Heading/>
                                <Navbar/>
