@@ -5,8 +5,10 @@ import {resetFirstInputPolyfill} from "web-vitals/dist/modules/lib/polyfills/fir
 export const AddNewDevicePage = (props) => {
 
     const [sellerAadhaar, setSellerAadhaar] = useState('')
+    const [tempAadhaar, setTempAadhaar] = useState('')
     const [goodDeviceDetails, setGoodDeviceDetails] = useState({})
     const [IMEIofGood, setIMEIofGood] = useState('')
+    const [tempIMEI, setTempIMEI] = useState('')
     const [goodDeviceOwnerDetails, setGoodDeviceOwnerDetails] = useState({})
     const [warningContent, setWarningContent] = React.useState('')
     const [warningExists, setWarningExists] = React.useState(false)
@@ -160,6 +162,30 @@ export const AddNewDevicePage = (props) => {
             console.log("AADHAAR VALIDITY = " + aadhaarValidity)
         }
     },[goodDeviceOwnerDetails])
+
+    useEffect(()=>{
+        if(sellerAadhaar==='0'){
+            setSellerAadhaar('')
+        }
+        if(sellerAadhaar.length===12){
+            setTempAadhaar(sellerAadhaar)
+        }
+        if(sellerAadhaar.length>12){
+            setSellerAadhaar(tempAadhaar)
+        }
+    },[sellerAadhaar])
+
+    useEffect(()=>{
+        if(IMEIofGood==='0'){
+            setIMEIofGood('')
+        }
+        if(IMEIofGood.length===16){
+            setTempIMEI(IMEIofGood)
+        }
+        if(IMEIofGood.length>16){
+            setIMEIofGood(tempIMEI)
+        }
+    },[IMEIofGood])
 
 
     return (
