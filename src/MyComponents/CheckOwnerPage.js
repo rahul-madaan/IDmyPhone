@@ -12,6 +12,7 @@ export const CheckOwnerPage = (props) => {
     const [skipCount2, setSkipCount2] = useState(true);
     const [skipCount3, setSkipCount3] = useState(true);
     const [skipCount4, setSkipCount4] = useState(true);
+    const [IMEIValidity, setIMEIValidity] = useState(true);
     const [deviceLostStatus, setDeviceLostStatus] = useState(false);
     const [deviceLostStatusWord, setDeviceLostStatusWord] = useState(false);
     const [warningContent, setWarningContent] = React.useState('')
@@ -36,12 +37,16 @@ export const CheckOwnerPage = (props) => {
             axios.get("http://localhost:8000/check-IMEI-validity/" + deviceIMEI)
                 .then((result) => {
                     if(result.data[0].status_code === 1){
+                        //Invalid IMEI
                         setWarningExists(true)
                         setWarningContent('Enter valid IMEI Number')
+                        setIMEIValidity('')
                     }
                     else if(result.data[0].status_code === 0){
+                        //Valid IMEI
                         setWarningExists(false)
                         setWarningContent('')
+                        setIMEIValidity(Math.random)
                     }
                 })
         }
@@ -49,8 +54,8 @@ export const CheckOwnerPage = (props) => {
 
 
     useLayoutEffect(()=>{
-        if (skipCount || deviceOwnerAadhaar === '') setSkipCount(false);
-        else if (!skipCount) {
+        if (skipCount) setSkipCount(false);
+        else if (!skipCount && IMEIValidity !== '') {
             axios.post("http://localhost:8000/get-user-name", {
                 user_aadhaar_number: deviceOwnerAadhaar
             }).then((result) => {
@@ -58,7 +63,7 @@ export const CheckOwnerPage = (props) => {
                 setDeviceOwnerName(result.data[0].name)
             })
         }
-    },[deviceOwnerAadhaar])
+    },[IMEIValidity])
 
     useLayoutEffect(()=>{
         if (skipCount2 || deviceOwnerName === '') setSkipCount2(false);
