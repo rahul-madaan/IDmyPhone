@@ -1,8 +1,12 @@
-import React from 'react'
+import React, {useLayoutEffect, useState} from 'react'
 import {useNavigate} from "react-router-dom";
 import axios from "axios";
 
 export const HomeTableContent = (props) => {
+    const [deleteTransferRequest, setDeleteTransferRequest] = useState('')
+    const [deviceIMEI, setDeviceIMEI] = useState()
+    const [skipCount, setSkipCount] = useState(true)
+
     let navigate = useNavigate();
     const routeChange = (path) => {
         navigate(path);
@@ -33,21 +37,39 @@ export const HomeTableContent = (props) => {
                 'IMEI': e.target.getAttribute('data-value2')
             }
             console.log("IMEI OF DEVICE TO BE REPORTED LOST = "+ e.target.value)
+            setDeviceIMEI(e.target.value)
             console.log(dict)
-            axios.post("http://localhost:8000/report-theft?IMEI="+e.target.value)
-            console.log("Reported stolen")
-            props.setUpdateLinkedDevices(Math.random())
-            props.setNotificationContent("Phone reported as stolen/lost successfully!")
-            props.setNotificationExists(true)
-            setTimeout(() => {
-                props.setNotificationContent('')
-                props.setNotificationExists(false)
-            }, 3000)
+            axios.post("http://localhost:8000/report-theft?IMEI="+e.target.value).then(()=>{
+                setDeleteTransferRequest(Math.random)
+                props.setUpdateLinkedDevices(Math.random())
+                console.log("Reported stolen")
+                props.setNotificationContent("Phone reported as stolen/lost successfully!")
+                props.setNotificationExists(true)
+                setTimeout(() => {
+                    props.setNotificationContent('')
+                    props.setNotificationExists(false)
+                }, 3000)
+            })
+
         }
         else{
             console.log("Not reported stolen")
         }
     }
+
+    useLayoutEffect(()=> {
+        if (skipCount) setSkipCount(false);
+        else if(deleteTransferRequest===''){}
+        else if(!skipCount) {
+            axios.post("http://localhost:8000/delete-transfer-request?IMEI=" + deviceIMEI)
+                .then((result) => {
+                    console.log("Executed and deleted the transfer request")
+                    setDeleteTransferRequest('')
+                })
+        }
+
+    },[deleteTransferRequest])
+
 
     return (
 

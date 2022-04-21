@@ -6,22 +6,23 @@ import {HomeTableContent} from "./HomeTableContent";
 
 
 export const HomePage = (props) => {
-    const [updateLinkedDevices,setUpdateLinkedDevices] = useState(Math.random)
+    const [updateLinkedDevices,setUpdateLinkedDevices] = useState('')
     const [skipCount, setSkipCount] = useState(true);
+    const [skipCount2, setSkipCount2] = useState(true);
     const [updateByReportTheft, setUpdateByReportTheft] = useState(false)
     const [notificationExists, setNotificationExists] = useState(false)
     const [notificationContent, setNotificationContent] = useState('')
 
 
     useLayoutEffect(() => {
-        axios.post("http://localhost:8000/get-linked-devices", {
-            'user_aadhaar_number': props.userAadhaarNumber
-        }).then((result) => {
-            console.log(result)
-            if (result.data) {
-                props.setUserLinkedDevices(result.data)
-            }
-        })
+            axios.post("http://localhost:8000/get-linked-devices", {
+                'user_aadhaar_number': props.userAadhaarNumber
+            }).then((result) => {
+                console.log(result)
+                if (result.data) {
+                    props.setUserLinkedDevices(result.data)
+                }
+            })
     }, [updateLinkedDevices]);
 
     useLayoutEffect(() => {
