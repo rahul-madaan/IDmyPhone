@@ -8,3 +8,5 @@ lost/stolen devices to stop trading of stolen phones and reduce crime.
 - Database: MySQL
 
 # Features
+
+# Initial Setup
