@@ -132,7 +132,7 @@ export const RegisterPage = (props) => {
                 <button type="submit" className="btn btn-primary" onClick={registerSubmit}>Register</button>
             </form>
             {showWarning ?
-                <div className="alert alert-danger" role="alert">
+                <div className="alert alert-danger my-3" role="alert">
                     {warningContent}
                 </div> : null}
         </div>
