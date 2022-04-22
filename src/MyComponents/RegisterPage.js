@@ -43,21 +43,30 @@ export const RegisterPage = (props) => {
             setShowWarning(true)
             setWarningContent("Password cannot be less than 4 characters!")
         }
-        else {
-            axios.post("http://localhost:8000/register_user", {
-                'aadhaar_number': registerAadhaarNumber,
-                'password': registerPassword,
-                'user_name': registerUserName,
-                'email': registerEmail,
-                'phone_number': registerPhoneNumber
-            }).then((result) => {
-                console.log(result)
-                routeChange("/login")
-                props.setRegisterSuccessNotif(true)
-                setTimeout(() => {
-                    props.setRegisterSuccessNotif(false)
-                }, 4000)
-            })
+        else{
+            axios.get("http://localhost:8000/check-aadhaar-validity/" + registerAadhaarNumber)
+                .then((res)=>{
+                    if(res.data[0].status_code === 1){
+                        axios.post("http://localhost:8000/register_user", {
+                            'aadhaar_number': registerAadhaarNumber,
+                            'password': registerPassword,
+                            'user_name': registerUserName,
+                            'email': registerEmail,
+                            'phone_number': registerPhoneNumber
+                        }).then((result) => {
+                            console.log(result)
+                            routeChange("/login")
+                            props.setRegisterSuccessNotif(true)
+                            setTimeout(() => {
+                                props.setRegisterSuccessNotif(false)
+                            }, 4000)
+                        })
+                    }else{
+                        setShowWarning(true)
+                        setWarningContent("User already registered!")
+                    }
+                })
+
         }
     }
 
