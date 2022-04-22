@@ -70,6 +70,11 @@ export const TransferRequestsPage = (props) => {
                             })}
                             </tbody>
                         </table>
+                        {transferRequestArray.length===0?
+                            <div style={{ color: 'grey',
+                                textAlign: "center"}}>
+                                No content to display
+                            </div>:null}
                     </div>
                 </div>
             </div>

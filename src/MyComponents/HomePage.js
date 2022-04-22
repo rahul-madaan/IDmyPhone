@@ -81,6 +81,11 @@ export const HomePage = (props) => {
                             })}
                             </tbody>
                         </table>
+                        {props.userLinkedDevices.length===0?
+                            <div style={{ color: 'grey',
+                                textAlign: "center"}}>
+                                No content to display
+                            </div>:null}
                         {notificationExists ?
                             <div className="alert alert-success" role="alert">
                                 {notificationContent}
