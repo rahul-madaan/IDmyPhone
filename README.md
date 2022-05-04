@@ -4,7 +4,7 @@ lost/stolen devices to stop trading of stolen phones and reduce crime.
 
 # Tech Stack
 - FrontEnd: ReactJS
-- BackEnd: Python FastAPI
+- BackEnd: Python FastAPI https://github.com/rahul-madaan/phone-one-server
 - Database: MySQL
 
 # Features
