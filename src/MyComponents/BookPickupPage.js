@@ -1,6 +1,6 @@
 import axios from "axios";
 import {useNavigate} from "react-router-dom";
-import React, {useEffect, useLayoutEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 import PhoneImage from "../MyPhotos/image-removebg-preview.png"
 
 export const BookPickupPage = (props) => {
