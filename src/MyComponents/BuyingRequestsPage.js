@@ -1,7 +1,6 @@
 import axios from "axios";
 import {useNavigate} from "react-router-dom";
 import React, {useEffect, useLayoutEffect, useState} from "react";
-import {TransferTableContent} from "./TransferTableContent";
 import {BuyingTableContent} from "./BuyingTableContent";
 
 export const BuyingRequestsPage = (props) => {
