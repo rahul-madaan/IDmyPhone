@@ -23,6 +23,10 @@ lost/stolen devices to stop trading of stolen phones and reduce crime.
 11. Run command `npm start` to start the ReactJS server on port 3000
 12. Open http://localhost:3000/ on your browser.
 
+# Database UML Diagram
+![image](https://user-images.githubusercontent.com/34760210/171046512-bfbc6818-7a1b-4e2c-b227-3241c7ca86c7.png)
+
+
 # User Interface
 ## Register Page
 <img width="1439" alt="Screenshot 2022-05-31 at 12 11 37 AM" src="https://user-images.githubusercontent.com/34760210/171046116-336c506f-394d-42a4-966c-c52d5c70dfdc.png">
