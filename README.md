@@ -37,8 +37,14 @@ lost/stolen devices to stop trading of stolen phones and reduce crime.
 ## Transfer Requests Page
 <img width="1438" alt="Screenshot 2022-05-31 at 12 08 47 AM" src="https://user-images.githubusercontent.com/34760210/171045853-31f58c11-c495-45e0-a462-fd8711950443.png">
 
+## My Buying Requests Page
+<img width="1440" alt="Screenshot 2022-05-31 at 12 23 51 AM" src="https://user-images.githubusercontent.com/34760210/171047504-93abf4bb-d525-4fbc-b289-d8979381fa4c.png">
+
 ## Buy New Device Page
 <img width="1438" alt="Screenshot 2022-05-31 at 12 09 37 AM" src="https://user-images.githubusercontent.com/34760210/171045943-28f43d7c-346f-4621-8627-f7605af93f11.png">
 
 ## Check Owner Page
 <img width="1436" alt="Screenshot 2022-05-31 at 12 09 57 AM" src="https://user-images.githubusercontent.com/34760210/171045973-8d2a2ffa-aada-4e93-aeff-10d09b829111.png">
+
+## Recycle Device / Book Device Pickup Page
+<img width="1436" alt="Screenshot 2022-05-31 at 12 23 21 AM" src="https://user-images.githubusercontent.com/34760210/171047436-ff143ca7-117b-49b5-9bd8-0c938bf99464.png">
