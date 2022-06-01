@@ -2,10 +2,6 @@ import React, {useLayoutEffect, useState} from 'react'
 import axios from "axios";
 
 export const BuyingTableContent = (props) => {
-    const [currentOwnerAadhaar, setCurrentOwnerAadhaar] = useState('')
-    const [selectedDeviceIMEI, setSelectedDeviceIMEI] = useState('')
-    const [skipCount, setSkipCount] = useState(true);
-
 
     const rejectRequest = (e) => {
         e.preventDefault()
