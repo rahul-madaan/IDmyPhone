@@ -52,15 +52,18 @@ lost/stolen devices to stop trading of stolen phones and reduce crime.
 ## Notifications
 ### Incorrect Password
 <img width="1439" alt="Screenshot 2022-06-04 at 3 35 58 AM" src="https://user-images.githubusercontent.com/34760210/171960402-43c8193d-e0dd-41bb-ba69-ccf8ff588183.png">
+
 ### Registration Validation
 <img width="1440" alt="Screenshot 2022-06-04 at 3 37 43 AM" src="https://user-images.githubusercontent.com/34760210/171960598-2aef3376-0a07-4e09-8bf1-542880352705.png">
 <img width="1440" alt="Screenshot 2022-06-04 at 3 38 12 AM" src="https://user-images.githubusercontent.com/34760210/171960641-f985e03f-462a-4f3c-a1e1-b868867ddc5b.png">
 <img width="1440" alt="Screenshot 2022-06-04 at 3 38 34 AM" src="https://user-images.githubusercontent.com/34760210/171960666-3383b37b-3b7a-41d8-8fda-a042b0482a4c.png">
 <img width="1440" alt="Screenshot 2022-06-04 at 3 38 56 AM" src="https://user-images.githubusercontent.com/34760210/171960687-c4d083ab-ee93-4f2b-8797-075b84d674d1.png">
 <img width="1437" alt="Screenshot 2022-06-04 at 3 39 15 AM" src="https://user-images.githubusercontent.com/34760210/171960724-d50b7277-554f-48a2-889c-7ade6796ee9f.png">
+
 ### Book Pickup notifications
 <img width="1440" alt="Screenshot 2022-06-04 at 3 39 58 AM" src="https://user-images.githubusercontent.com/34760210/171960790-7a89f639-4a4e-4ab0-9ea7-bda25077a71b.png">
 <img width="1439" alt="Screenshot 2022-06-04 at 3 40 38 AM" src="https://user-images.githubusercontent.com/34760210/171960852-be2fd938-e1a2-46ee-8b4e-23954d801c9d.png">
+
 ### Report Lost/Stolen Notification
 <img width="1440" alt="Screenshot 2022-06-04 at 3 42 47 AM" src="https://user-images.githubusercontent.com/34760210/171961111-4cb24bc1-5f33-446d-8aec-20f1ff8e82af.png">
 
