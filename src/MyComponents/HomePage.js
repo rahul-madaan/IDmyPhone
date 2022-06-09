@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, {useEffect, useLayoutEffect, useState} from "react";
+import React, {useLayoutEffect, useState} from "react";
 import {HomeTableContent} from "./HomeTableContent";
 
 
