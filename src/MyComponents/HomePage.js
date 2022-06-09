@@ -7,7 +7,6 @@ import {HomeTableContent} from "./HomeTableContent";
 export const HomePage = (props) => {
     const [updateLinkedDevices,setUpdateLinkedDevices] = useState('')
     const [skipCount, setSkipCount] = useState(true);
-    const [skipCount2, setSkipCount2] = useState(true);
     const [updateByReportTheft, setUpdateByReportTheft] = useState(false)
     const [notificationExists, setNotificationExists] = useState(false)
     const [notificationContent, setNotificationContent] = useState('')
