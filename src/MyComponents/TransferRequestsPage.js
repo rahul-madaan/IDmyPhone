@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, {useEffect, useLayoutEffect, useState} from "react";
+import React, {useLayoutEffect, useState} from "react";
 import {TransferTableContent} from "./TransferTableContent";
 import {useNavigate} from "react-router-dom";
 
