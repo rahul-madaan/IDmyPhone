@@ -1,6 +1,5 @@
 import axios from "axios";
-import React, {useCallback, useEffect, useLayoutEffect, useState} from "react";
-import {resetFirstInputPolyfill} from "web-vitals/dist/modules/lib/polyfills/firstInputPolyfill";
+import React,  {useEffect, useLayoutEffect, useState} from "react";
 
 export const AddNewDevicePage = (props) => {
 
